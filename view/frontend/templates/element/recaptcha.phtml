@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var $block \Cytracon\BlueFormBuilderCore\Block\Element\Control
+ */
+
+$formHelper = $this->helper('\Cytracon\BlueFormBuilderCore\Helper\Data');
+$publicKey  = $formHelper->getConfig('recaptcha/public_key');
+$elementId  = $this->getElHtmlId();
+$element    = $this->getElement();
+$id         = $element->getId();
+$type       = $element->getData('recaptcha_type');
+$language   = $element->getData('recaptcha_language');
+$theme      = $element->getData('recaptcha_theme');
+$size       = $element->getData('recaptcha_size');
+?>
+<div class="g-recaptcha" id="<?= $elementId ?>"></div>
+<script src='https://www.google.com/recaptcha/api.js?hl=<?= $language ?>&onload=onloadCallback<?= $id ?>&render=explicit' async defer></script>
+<script>
+	var onloadCallback<?= $id ?> = function() {
+		grecaptcha.render('<?= $elementId ?>', {
+			sitekey : '<?= $publicKey ?>',
+			type: '<?= $type ?>',
+			theme: '<?= $theme ?>',
+			size: '<?= $size ?>'
+		});
+	}
+</script>

@@ -1,0 +1,17 @@
+{
+  "name": "cytracon/blueformbuildercore",
+  "description": "Magento BlueFormBuilderCore Plugin",
+  "type": "magento2-module",
+  "license": "proprietary",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Cytracon\\BlueFormBuilderCore\\": ""
+    }
+  },
+  "require": {
+    "php": "^7.4 || ^8.0"
+  }
+}

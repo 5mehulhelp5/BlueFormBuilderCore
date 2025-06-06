@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cytracon
+ *
+ * This source file is subject to the Cytracon Software License, which is available at https://www.cytracon.com/license.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.cytracon.com for more information.
+ *
+ * @category  BlueFormBuilder
+ * @package   BlueFormBuilder_Core
+ * @copyright Copyright (C) 2022 Cytracon (https://www.cytracon.com)
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mgz_blueformbuilder_form" resource="default" engine="innodb" comment="Mgz BlueFormBuilder Form Table">
+        <column xsi:type="int" name="form_id" unsigned="false" nullable="false" identity="true" comment="Form ID" />
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Form Name" />
+        <column xsi:type="varchar" name="identifier" nullable="false" length="255" comment="Form Identifier" />
+        <column xsi:type="longtext" name="profile" nullable="true" comment="Short Code" />
+        <column xsi:type="smallint" name="enable_notification" unsigned="false" nullable="true" identity="false" default="0" comment="Enable Notification" />
+        <column xsi:type="varchar" name="sender_name" nullable="true" length="255" comment="Sender Name" />
+        <column xsi:type="varchar" name="sender_email" nullable="true" length="255" comment="Sender Email" />
+        <column xsi:type="varchar" name="reply_to" nullable="true" length="255" comment="Reply To" />
+        <column xsi:type="varchar" name="recipients" nullable="true" length="255" comment="Send Email(s) To" />
+        <column xsi:type="varchar" name="recipients_bcc" nullable="true" length="255" comment="BBC" />
+        <column xsi:type="varchar" name="email_subject" nullable="true" length="255" comment="Email Subject" />
+        <column xsi:type="longtext" name="email_body" nullable="true" comment="Email Body" />
+        <column xsi:type="smallint" name="attach_files" unsigned="false" nullable="true" identity="false" default="0" comment="Attach File Uploads to Emails" />
+        <column xsi:type="smallint" name="enable_customer_notification" unsigned="false" nullable="true" identity="false" default="0" comment="Enable Customer Notification" />
+        <column xsi:type="varchar" name="customer_sender_name" nullable="true" length="255" comment="Customer Sender Name" />
+        <column xsi:type="varchar" name="customer_sender_email" nullable="true" length="255" comment="Customer Sender Email" />
+        <column xsi:type="varchar" name="customer_reply_to" nullable="true" length="255" comment="Customer Reply To" />
+        <column xsi:type="varchar" name="customer_email_subject" nullable="true" length="255" comment="Customer Email Subject" />
+        <column xsi:type="longtext" name="customer_email_body" nullable="true" comment="Customer Email Body" />
+        <column xsi:type="smallint" name="customer_attach_files" unsigned="false" nullable="true" identity="false" default="0" comment="Attach File Uploads to Emails" />
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="true" identity="false" default="1" comment="Is Form Active" />
+        <column xsi:type="smallint" name="disable_form_page" unsigned="false" nullable="true" identity="false" default="1" comment="Disable Form Page" />
+        <column xsi:type="smallint" name="show_toplink" unsigned="false" nullable="true" identity="false" default="1" comment="Show in Top Links" />
+        <column xsi:type="varchar" name="position" nullable="true" length="255" comment="Position" />
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Meta Title" />
+        <column xsi:type="text" name="meta_keywords" nullable="true" comment="Form Meta Keywords" />
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Form Meta Description" />
+        <column xsi:type="text" name="js_on_pageload" nullable="true" comment="On Page Load" />
+        <column xsi:type="text" name="js_before_submit" nullable="true" comment="Before Submit" />
+        <column xsi:type="text" name="js_after_submit" nullable="true" comment="After Submit" />
+        <column xsi:type="smallint" name="disable_multiple" unsigned="false" nullable="true" identity="false" default="1" comment="Disable Multiple" />
+        <column xsi:type="varchar" name="disable_multiple_condition" nullable="true" length="255" comment="Disable Condition" />
+        <column xsi:type="text" name="disable_multiple_message" nullable="true" comment="Message when disabled" />
+        <column xsi:type="text" name="disable_multiple_fields" nullable="true" comment="Disable Multiple Fields" />
+        <column xsi:type="varchar" name="disable_after_nos" nullable="true" length="255" comment="Disable form when it reaches X submissions" />
+        <column xsi:type="varchar" name="redirect_to" nullable="true" length="255" comment="Redirect on Submit" />
+        <column xsi:type="varchar" name="redirect_delay" nullable="true" length="255" comment="Redirect X seconds after form submit" />
+        <column xsi:type="varchar" name="submission_prefix" nullable="true" length="255" comment="Submission Prefix" />
+        <column xsi:type="varchar" name="page_layout" nullable="true" length="255" comment="Page Layout" />
+        <column xsi:type="varchar" name="custom_classes" nullable="true" length="255" comment="Custom Classes" />
+        <column xsi:type="text" name="custom_css" nullable="true" comment="Custom CSS" />
+        <column xsi:type="text" name="success_message" nullable="true" comment="Success Message" />
+        <column xsi:type="text" name="success_message_header" nullable="true" comment="Success Message Header" />
+        <column xsi:type="text" name="success_message_footer" nullable="true" comment="Success Message Footer" />
+        <column xsi:type="varchar" name="success_message_style" nullable="true" length="255" comment="Success Message Style" />
+        <column xsi:type="varchar" name="success_message_heading_color" nullable="true" length="255" comment="Success Message Heading Color" />
+        <column xsi:type="varchar" name="success_message_heading_background_color" nullable="true" length="255" comment="Success Message Heading Background Color" />
+        <column xsi:type="varchar" name="success_message_heading_border_color" nullable="true" length="255" comment="Success Message Heading Border Color" />
+        <column xsi:type="varchar" name="bfb_form_key" nullable="true" length="255" comment="BFB Form Key" />
+        <column xsi:type="smallint" name="enable_autosave" unsigned="false" nullable="true" identity="false" default="1" comment="Auto Save Form Process" />
+        <column xsi:type="varchar" name="width" nullable="true" length="255" comment="Width" />
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Form Creation Time" />
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Form Modification Time" />
+        <column xsi:type="smallint" name="enable_recaptcha" unsigned="false" nullable="true" identity="false" default="0" comment="Enable reCaptcha" />
+        <column xsi:type="longtext" name="email_header" nullable="true" comment="Email Header" />
+        <column xsi:type="longtext" name="email_footer" nullable="true" comment="Email Footer" />
+        <column xsi:type="longtext" name="customer_email_header" nullable="true" comment="Customer Email Header" />
+        <column xsi:type="longtext" name="customer_email_footer" nullable="true" comment="Customer Email Footer" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="form_id" />
+        </constraint>
+        <index referenceId="MGZ_BLUEFORMBUILDER_FORM_NAME_PROFILE" indexType="fulltext">
+            <column name="name" />
+            <column name="profile" />
+        </index>
+    </table>
+    <table name="mgz_blueformbuilder_form_store" resource="default" engine="innodb" comment="Mgz BlueFormBuilder Form Store Table">
+        <column xsi:type="int" name="form_id" unsigned="false" nullable="false" identity="false" comment="Form ID" />
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Store ID" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="form_id" />
+            <column name="store_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_FORM_FORM_ID_MGZ_BLUEFORMBUILDER_FORM_STORE_FORM_ID" table="mgz_blueformbuilder_form_store" column="form_id" referenceTable="mgz_blueformbuilder_form" referenceColumn="form_id" onDelete="CASCADE" />
+        <constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_FORM_STORE_STORE_ID_STORE_STORE_ID" table="mgz_blueformbuilder_form_store" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE" />
+        <index referenceId="MGZ_BLUEFORMBUILDER_FORM_STORE_STORE_ID" indexType="btree">
+            <column name="store_id" />
+        </index>
+    </table>
+    <table name="mgz_blueformbuilder_form_customer_group" resource="default" engine="innodb" comment="Mgz BlueFormBuilder Form Customer Groups">
+        <column xsi:type="int" name="form_id" unsigned="false" nullable="false" identity="false" />
+        <column xsi:type="int" name="customer_group_id" unsigned="true" nullable="false" identity="false" comment="Customer Group ID" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="form_id" />
+            <column name="customer_group_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_FORM_CUSTOMER_GROUP_FORM_ID_MGZ_BLUEFORMBUILDER_FORM_FORM_ID" table="mgz_blueformbuilder_form_customer_group" column="form_id" referenceTable="mgz_blueformbuilder_form" referenceColumn="form_id" onDelete="CASCADE" />
+        <constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_FORM_CSTR_GROUP_CSTR_GROUP_ID_CSTR_GROUP_CSTR_GROUP_ID" table="mgz_blueformbuilder_form_customer_group" column="customer_group_id" referenceTable="customer_group" referenceColumn="customer_group_id" onDelete="CASCADE" />
+        <index referenceId="MGZ_BLUEFORMBUILDER_FORM_CUSTOMER_GROUP_CUSTOMER_GROUP_ID" indexType="btree">
+            <column name="customer_group_id" />
+        </index>
+    </table>
+    <table name="mgz_blueformbuilder_submission" resource="default" engine="innodb" comment="Mgz BlueFormBuilder Submission">
+        <column xsi:type="int" name="submission_id" unsigned="false" nullable="false" identity="true" comment="Submission ID" />
+        <column xsi:type="int" name="form_id" unsigned="false" nullable="false" identity="false" comment="Form ID" />
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" identity="false" comment="Customer ID" />
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="255" comment="Increment ID" />
+        <column xsi:type="varchar" name="product_id" nullable="true" length="255" comment="Product ID" />
+        <column xsi:type="varchar" name="sender_name" nullable="true" length="255" comment="Sender Name" />
+        <column xsi:type="varchar" name="sender_email" nullable="true" length="255" comment="Sender Email" />
+        <column xsi:type="varchar" name="reply_to" nullable="true" length="255" comment="Reply To" />
+        <column xsi:type="varchar" name="recipients" nullable="true" length="255" comment="Recipients" />
+        <column xsi:type="varchar" name="recipients_bcc" nullable="true" length="255" comment="Recipients BBC" />
+        <column xsi:type="varchar" name="email_subject" nullable="true" length="255" comment="Email Subject" />
+        <column xsi:type="longtext" name="email_body" nullable="true" comment="Email Body" />
+        <column xsi:type="varchar" name="customer_sender_name" nullable="true" length="255" comment="Customer Sender Name" />
+        <column xsi:type="varchar" name="customer_sender_email" nullable="true" length="255" comment="Customer Sender Email" />
+        <column xsi:type="varchar" name="customer_reply_to" nullable="true" length="255" comment="Customer Reply To" />
+        <column xsi:type="varchar" name="customer_email_subject" nullable="true" length="255" comment="Customer Email Subject" />
+        <column xsi:type="varchar" name="customer_recipients" nullable="true" length="255" comment="Customer Recipients" />
+        <column xsi:type="longtext" name="customer_email_body" nullable="true" comment="Customer Email Body" />
+        <column xsi:type="longtext" name="form_params" nullable="true" comment="Form Params" />
+        <column xsi:type="varchar" name="remote_ip" nullable="true" length="16" comment="Remote IP" />
+        <column xsi:type="bigint" name="remote_ip_long" nullable="true" comment="Customer IP converted to long integer format" />
+        <column xsi:type="longtext" name="submission_content" nullable="true" comment="Submission Content" />
+        <column xsi:type="longtext" name="admin_submission_content" nullable="true" comment="Admin Submission Content" />
+        <column xsi:type="longtext" name="params" nullable="true" comment="Params" />
+        <column xsi:type="longtext" name="post" nullable="true" comment="Form Post" />
+        <column xsi:type="longtext" name="processed_params" nullable="true" comment="Process Params" />
+        <column xsi:type="longtext" name="elements" nullable="true" comment="Elements" />
+        <column xsi:type="longtext" name="submitted_page" nullable="true" comment="Submitted from Page" />
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Store ID" />
+        <column xsi:type="varchar" name="condition_emails" nullable="true" length="255" comment="Conditional Emails" />
+        <column xsi:type="varchar" name="brower" nullable="true" length="255" comment="Brower" />
+        <column xsi:type="longtext" name="values" nullable="true" comment="Values" />
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Submission Creation Time" />
+        <column xsi:type="varchar" name="read" nullable="true" length="255" comment="Read" />
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="true" default="CURRENT_TIMESTAMP" comment="Form Modification Time" />
+        <column xsi:type="longtext" name="submission_hash" nullable="true" comment="Submission Hash" />
+        <column xsi:type="smallint" name="send_count" unsigned="false" nullable="true" identity="false" default="0" comment="Send Count" />
+        <column xsi:type="smallint" name="customer_send_count" unsigned="false" nullable="true" identity="false" default="0" comment="Customer Send Count" />
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="true" identity="false" default="0" comment="Is Submission Active" />
+        <column xsi:type="smallint" name="admin_notification" unsigned="false" nullable="true" identity="false" default="0" comment="Is Admin Notification" />
+        <column xsi:type="smallint" name="enable_trackback_page" unsigned="false" nullable="true" identity="false" default="1" comment="Enable Trackback Page" />
+        <column xsi:type="smallint" name="customer_notification" unsigned="false" nullable="true" identity="false" default="0" comment="Is Customer Notification" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="submission_id" />
+            <column name="form_id" />
+            <column name="store_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_FORM_FORM_ID_MGZ_BLUEFORMBUILDER_SUBMISSION_FORM_ID" table="mgz_blueformbuilder_submission" column="form_id" referenceTable="mgz_blueformbuilder_form" referenceColumn="form_id" onDelete="CASCADE" />
+        <!--<constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_SUBMISSION_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="mgz_blueformbuilder_submission" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>-->
+        <constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_SUBMISSION_STORE_ID_STORE_STORE_ID" table="mgz_blueformbuilder_submission" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE" />
+        <index referenceId="MGZ_BLUEFORMBUILDER_SUBMISSION_STORE_ID" indexType="btree">
+            <column name="store_id" />
+        </index>
+    </table>
+    <table name="mgz_blueformbuilder_submission_file" resource="default" engine="innodb" comment="Mgz BlueFormBuilder Submission File">
+        <column xsi:type="int" name="file_id" unsigned="false" nullable="false" identity="true" comment="File ID" />
+        <column xsi:type="int" name="submission_id" unsigned="false" nullable="false" identity="false" comment="Submission ID" />
+        <column xsi:type="int" name="form_id" unsigned="false" nullable="false" identity="false" comment="Form ID" />
+        <column xsi:type="varchar" name="element_id" nullable="false" length="255" comment="Element ID" />
+        <column xsi:type="varchar" name="file" nullable="false" length="255" comment="File" />
+        <column xsi:type="int" name="size" nullable="false" comment="Size" />
+        <column xsi:type="varchar" name="mine_type" nullable="false" length="255" comment="Mine Type" />
+        <column xsi:type="smallint" name="number_of_downloads" unsigned="false" nullable="false" identity="false" default="0" comment="Number Of Downloads" />
+        <column xsi:type="longtext" name="file_hash" nullable="true" comment="File Hash" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="File Creation Time" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="file_id" />
+            <column name="submission_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_SUBMISSION_SUBMISSION_ID_MGZ_BLUEFORMBUILDER_SUBMISSION_FILE_SUBMISSION_ID" table="mgz_blueformbuilder_submission_file" column="submission_id" referenceTable="mgz_blueformbuilder_submission" referenceColumn="submission_id" onDelete="CASCADE" />
+        <index referenceId="MGZ_BLUEFORMBUILDER_SUBMISSION_FILE_SUBMISSION_ID" indexType="btree">
+            <column name="submission_id" />
+        </index>
+    </table>
+    <table name="mgz_blueformbuilder_form_progress" resource="default" engine="innodb" comment="Mgz BlueFormBuilder Progress Table">
+        <column xsi:type="int" name="progress_id" unsigned="false" nullable="false" identity="true" comment="Progress ID" />
+        <column xsi:type="int" name="form_id" unsigned="false" nullable="false" identity="false" comment="Form ID" />
+        <column xsi:type="int" name="visitor_id" unsigned="false" nullable="false" identity="false" comment="Visitor ID" />
+        <column xsi:type="longtext" name="post" nullable="true" comment="Form Post" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time" />
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Modification Time" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="progress_id" />
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MGZ_BLUEFORMBUILDER_PROGRESS_FORM_ID_MGZ_BLUEFORMBUILDER_FORM_FORM_ID" table="mgz_blueformbuilder_progress" column="form_id" referenceTable="mgz_blueformbuilder_form" referenceColumn="form_id" onDelete="CASCADE" />
+        <index referenceId="MGZ_BLUEFORMBUILDER_SUBMISSION_PROGRESS_VISITOR_ID_FORM_ID" indexType="btree">
+            <column name="visitor_id" />
+            <column name="form_id" />
+        </index>
+    </table>
+</schema>

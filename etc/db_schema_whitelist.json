@@ -1,0 +1,182 @@
+{
+    "mgz_blueformbuilder_form": {
+        "column": {
+            "form_id": true,
+            "name": true,
+            "identifier": true,
+            "profile": true,
+            "enable_notification": true,
+            "sender_name": true,
+            "sender_email": true,
+            "reply_to": true,
+            "recipients": true,
+            "recipients_bcc": true,
+            "email_subject": true,
+            "email_body": true,
+            "attach_files": true,
+            "enable_customer_notification": true,
+            "customer_sender_name": true,
+            "customer_sender_email": true,
+            "customer_reply_to": true,
+            "customer_email_subject": true,
+            "customer_email_body": true,
+            "customer_attach_files": true,
+            "is_active": true,
+            "disable_form_page": true,
+            "show_toplink": true,
+            "position": true,
+            "meta_title": true,
+            "meta_keywords": true,
+            "meta_description": true,
+            "js_on_pageload": true,
+            "js_before_submit": true,
+            "js_after_submit": true,
+            "disable_multiple": true,
+            "disable_multiple_condition": true,
+            "disable_multiple_message": true,
+            "disable_multiple_fields": true,
+            "disable_after_nos": true,
+            "redirect_to": true,
+            "redirect_delay": true,
+            "submission_prefix": true,
+            "page_layout": true,
+            "custom_classes": true,
+            "custom_css": true,
+            "success_message": true,
+            "success_message_header": true,
+            "success_message_footer": true,
+            "success_message_style": true,
+            "success_message_heading_color": true,
+            "success_message_heading_background_color": true,
+            "success_message_heading_border_color": true,
+            "bfb_form_key": true,
+            "enable_autosave": true,
+            "width": true,
+            "creation_time": true,
+            "update_time": true,
+            "enable_recaptcha": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mgz_blueformbuilder_form_store": {
+        "column": {
+            "form_id": true,
+            "store_id": true
+        },
+        "index": {
+            "MGZ_BLUEFORMBUILDER_FORM_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_28590BF897271623C81BE0168181265C": true,
+            "MGZ_BLUEFORMBUILDER_FORM_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mgz_blueformbuilder_form_customer_group": {
+        "column": {
+            "form_id": true,
+            "customer_group_id": true
+        },
+        "index": {
+            "MGZ_BLUEFORMBUILDER_FORM_CUSTOMER_GROUP_CUSTOMER_GROUP_ID": true,
+            "MGZ_BLUEFORMBUILDER_FORM_CUSTOMER_GROUP_FORM_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_E99C9AD4974CFF704495C30E87B94E2E": true,
+            "FK_5EB4658143948638ED767F3F48D1BC82": true
+        }
+    },
+    "mgz_blueformbuilder_submission": {
+        "column": {
+            "submission_id": true,
+            "form_id": true,
+            "customer_id": true,
+            "increment_id": true,
+            "product_id": true,
+            "sender_name": true,
+            "sender_email": true,
+            "reply_to": true,
+            "recipients": true,
+            "recipients_bcc": true,
+            "email_subject": true,
+            "email_body": true,
+            "customer_sender_name": true,
+            "customer_sender_email": true,
+            "customer_reply_to": true,
+            "customer_email_subject": true,
+            "customer_recipients": true,
+            "customer_email_body": true,
+            "form_params": true,
+            "remote_ip": true,
+            "remote_ip_long": true,
+            "submission_content": true,
+            "admin_submission_content": true,
+            "params": true,
+            "post": true,
+            "processed_params": true,
+            "elements": true,
+            "submitted_page": true,
+            "store_id": true,
+            "condition_emails": true,
+            "brower": true,
+            "values": true,
+            "creation_time": true,
+            "read": true,
+            "update_time": true,
+            "submission_hash": true,
+            "send_count": true,
+            "customer_send_count": true,
+            "is_active": true,
+            "admin_notification": true,
+            "enable_trackback_page": true,
+            "customer_notification": true
+        },
+        "index": {
+            "MGZ_BLUEFORMBUILDER_SUBMISSION_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MGZ_BLUEFORMBUILDER_SUBMISSION_STORE_ID_STORE_STORE_ID": true,
+            "FK_AE762AA56A479D9CFEB14873767A2BE0": true
+        }
+    },
+    "mgz_blueformbuilder_submission_file": {
+        "column": {
+            "file_id": true,
+            "submission_id": true,
+            "form_id": true,
+            "element_id": true,
+            "file": true,
+            "size": true,
+            "mine_type": true,
+            "number_of_downloads": true,
+            "file_hash": true,
+            "created_at": true
+        },
+        "index": {
+            "MGZ_BLUEFORMBUILDER_SUBMISSION_FILE_SUBMISSION_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_AF3C3C3CBA7342D5AD9968C739661C3B": true
+        }
+    },
+    "mgz_blueformbuilder_form_progress": {
+        "column": {
+            "progress_id": true,
+            "form_id": true,
+            "visitor_id": true,
+            "post": true,
+            "created_at": true,
+            "update_time": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_B3E25AE86B20550B7341CBE6F758E7EE": true,
+            "MGZ_BLUEFORMBUILDER_FORM_PROGRESS_VISITOR_ID_FORM_ID": true
+        }
+    }
+}
