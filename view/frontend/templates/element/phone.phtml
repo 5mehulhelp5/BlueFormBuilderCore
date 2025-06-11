@@ -20,7 +20,7 @@ if ($element->getData('required')) $validate['required'] = true;
 	<i class="bfb-element-icon <?= $icon ?>"></i>
 <?php } ?>
 <script>
-	require(['jquery', 'BlueFormBuilder_Core/js/intlTelInput.min'], function($) {
+	require(['jquery', 'Cytracon_BlueFormBuilderCore/js/intlTelInput.min'], function($) {
 		var iti = window.intlTelInput($('#<?= $elementId ?>')[0], {
 			initialCountry: "auto",
 			hiddenInput: "full",
@@ -33,7 +33,7 @@ if ($element->getData('required')) $validate['required'] = true;
 		});
 		if (!window.intlTelInputInstances) window.intlTelInputInstances = {};
 		window.intlTelInputInstances['<?= $elementId ?>'] = iti;
-		window.intlTelInputGlobals.loadUtils('<?= $block->getViewFileUrl('BlueFormBuilder_Core/js/utils.js') ?>');
+		window.intlTelInputGlobals.loadUtils('<?= $block->getViewFileUrl('Cytracon_BlueFormBuilderCore/js/utils.js') ?>');
 		$('#<?= $elementId ?>').on('countrychange', function(e) {
 			$('#<?= $elementId ?>-code').val(iti.getSelectedCountryData().iso2);
 			$('#<?= $elementId ?>-dialcode').val('+' + iti.getSelectedCountryData().dialCode);

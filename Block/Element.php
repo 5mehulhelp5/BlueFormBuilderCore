@@ -158,3 +158,5 @@ class Element extends \Cytracon\Builder\Block\Element
         return ObjectManager::getInstance()->get(\Cytracon\BlueFormBuilderCore\Helper\Data::class);
     }
 }
+
+// (nur falls Template-URLs oder JS-Module verwendet werden, sonst keine Änderung)

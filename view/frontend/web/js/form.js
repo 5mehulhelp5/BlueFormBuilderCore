@@ -3,9 +3,9 @@ define([
     'underscore',
     'mage/template',
     'mage/mage',
-    'BlueFormBuilder_Core/js/validation',
-    'BlueFormBuilder_Core/js/form/element/text',
-    'BlueFormBuilder_Core/js/form/element/number'
+    'Cytracon_BlueFormBuilderCore/js/validation',
+    'Cytracon_BlueFormBuilderCore/js/form/element/text',
+    'Cytracon_BlueFormBuilderCore/js/form/element/number'
     ], function ($, _, mageTemplate) {
         'use strict';
 
@@ -231,7 +231,7 @@ define([
                         });
                     });
                     html = html.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
-                    $(pages).children('.bfb-page-indicator').html(html).text();
+                    $(pages).children('.bfb-page-indicator').html(html);
                 }
 
                 if (indicator=='progress') {
@@ -259,7 +259,7 @@ define([
                         data: data
                     });
                     html = html.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
-                    $(pages).children('.bfb-page-indicator').html(html).text();
+                    $(pages).children('.bfb-page-indicator').html(html);
                 }
 
                 if (indicator=='connector') {
@@ -275,7 +275,7 @@ define([
                         });
                     });
                     html = html.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
-                    $(pages).children('.bfb-page-indicator').html(html).text();
+                    $(pages).children('.bfb-page-indicator').html(html);
                 }
             }
         },

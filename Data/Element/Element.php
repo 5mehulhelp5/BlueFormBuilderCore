@@ -23,7 +23,7 @@ class Element extends AbstractElement
     {
     	$config = parent::getConfig();
     	if (!isset($config['templateUrl']) || !$config['templateUrl']) {
-    		$config['templateUrl'] = 'BlueFormBuilder_Core/js/templates/builder/control.html';
+    		$config['templateUrl'] = 'Cytracon_BlueFormBuilderCore/js/templates/builder/control.html';
     	}
     	return $config;
     }
