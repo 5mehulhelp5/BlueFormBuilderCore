@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -22,7 +22,7 @@ class Delete extends Generic
     public function getButtonData()
     {
         $data = [];
-        if ($this->getCurrentForm()->getId() && $this->_isAllowedAction('BlueFormBuilder_Core::form_delete')) {
+        if ($this->getCurrentForm()->getId() && $this->_isAllowedAction('Cytracon_BlueFormBuilderCore::form_delete')) {
             $data = [
                 'label'    => __('Delete'),
                 'class'    => 'delete',

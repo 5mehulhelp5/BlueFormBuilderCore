@@ -17,13 +17,13 @@
     // Register as an anonymous AMD module:
     define([
       "jquery",
-      "BlueFormBuilder_Core/js/jquery/fileUploader/jquery.fileupload",
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.fileupload",
     ], factory);
   } else if (typeof exports === "object") {
     // Node/CommonJS:
     factory(
       require("jquery"),
-      require("BlueFormBuilder_Core/js/jquery/fileUploader/jquery.fileupload")
+      require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.fileupload")
     );
   } else {
     // Browser globals:

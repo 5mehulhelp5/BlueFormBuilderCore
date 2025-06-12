@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -19,7 +19,7 @@ class View extends \Magento\Framework\View\Element\Template implements \Magento\
     /**
      * @var string
      */
-    protected $_template = 'BlueFormBuilder_Core::submission/view.phtml';
+    protected $_template = 'Cytracon_BlueFormBuilderCore::submission/view.phtml';
 
     /**
      * @var \Magento\Framework\Registry

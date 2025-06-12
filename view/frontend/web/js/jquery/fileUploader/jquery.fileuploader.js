@@ -12,19 +12,19 @@
     // Register as an anonymous AMD module:
     define([
       "jquery",
-      "BlueFormBuilder_Core/js/jquery/fileUploader/jquery.fileupload-image",
-      "BlueFormBuilder_Core/js/jquery/fileUploader/jquery.fileupload-audio",
-      "BlueFormBuilder_Core/js/jquery/fileUploader/jquery.fileupload-video",
-      "BlueFormBuilder_Core/js/jquery/fileUploader/jquery.iframe-transport",
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.fileupload-image",
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.fileupload-audio",
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.fileupload-video",
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.iframe-transport",
     ], factory);
   } else if (typeof exports === "object") {
     // Node/CommonJS:
     factory(
       require("jquery"),
-      require("BlueFormBuilder_Core/js/jquery/fileUploader/jquery.fileupload-image"),
-      require("BlueFormBuilder_Core/js/jquery/fileUploader/jquery.fileupload-audio"),
-      require("BlueFormBuilder_Core/js/jquery/fileUploader/jquery.fileupload-video"),
-      require("BlueFormBuilder_Core/js/jquery/fileUploader/jquery.iframe-transport")
+      require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.fileupload-image"),
+      require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.fileupload-audio"),
+      require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.fileupload-video"),
+      require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/jquery.iframe-transport")
     );
   } else {
     // Browser globals:

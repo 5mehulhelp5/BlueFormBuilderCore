@@ -9,7 +9,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
@@ -89,7 +89,7 @@
                         <item name="sortOrder" xsi:type="number">30</item>
                     </item>
                     <item name="bfb_after_modal_title" xsi:type="array">
-                        <item name="templateUrl" xsi:type="string">BlueFormBuilder_Core/js/templates/modal/title.html</item>
+                        <item name="templateUrl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/modal/title.html</item>
                         <item name="displayArea" xsi:type="string">after-modal-title</item>
                         <item name="dynamic" xsi:type="boolean">true</item>
                         <item name="sortOrder" xsi:type="number">10</item>
@@ -121,7 +121,7 @@
                     <item name="name" xsi:type="string" translate="true">Pages</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Pages</item>
                     <item name="element" xsi:type="string">Cytracon_Builder/js/builder/element/tabs</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/pages.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/pages.phtml</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Pages</item>
                     <item name="sortOrder" xsi:type="number">300</item>
                     <item name="icon" xsi:type="string">mgz-icon mgz-icon-tabs</item>
@@ -139,9 +139,9 @@
                 </item>
                 <item name="bfb_page" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Page</item>
-                    <item name="element" xsi:type="string">BlueFormBuilder_Core/js/builder/list</item>
+                    <item name="element" xsi:type="string">Cytracon_BlueFormBuilderCore/js/builder/list</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Page</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/page.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/page.phtml</item>
                     <item name="sortOrder" xsi:type="number">90</item>
                     <item name="excluded_types" xsi:type="string">bfb_page</item>
                     <item name="modalVisible" xsi:type="boolean">false</item>
@@ -158,9 +158,9 @@
                     <item name="name" xsi:type="string" translate="true">Field Set</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\FieldSet</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\FieldSet</item>
-                    <item name="element" xsi:type="string">BlueFormBuilder_Core/js/builder/list</item>
-                    <item name="templateUrl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/fieldset.html</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/fieldset.phtml</item>
+                    <item name="element" xsi:type="string">Cytracon_BlueFormBuilderCore/js/builder/list</item>
+                    <item name="templateUrl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/fieldset.html</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/fieldset.phtml</item>
                     <item name="sortOrder" xsi:type="number">302</item>
                     <item name="icon" xsi:type="string">fa fa-th-large</item>
                     <item name="icon_styles" xsi:type="array">
@@ -175,10 +175,10 @@
                 <item name="bfb_text" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Single Line Text</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Text</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/text.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Text</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/text.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/text.phtml</item>
                     <item name="sortOrder" xsi:type="number">304</item>
                     <item name="icon" xsi:type="string">mgz-icon mgz-icon-text-field</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -198,8 +198,8 @@
                 <item name="bfb_textarea" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Paragraph</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Textarea</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/textarea.html</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/textarea.phtml</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/textarea.html</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/textarea.phtml</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Textarea</item>
                     <item name="sortOrder" xsi:type="number">306</item>
                     <item name="icon" xsi:type="string">mgz-icon mgz-icon-menu-toggle</item>
@@ -220,9 +220,9 @@
                 <item name="bfb_email" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Email</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Email</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/text.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Text</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/text.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/text.phtml</item>
                     <item name="sortOrder" xsi:type="number">308</item>
                     <item name="icon" xsi:type="string">fa fa-envelope-o</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -245,9 +245,9 @@
                 <item name="bfb_date" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Date Picker</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Date</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/text.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Date</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/date.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/date.phtml</item>
                     <item name="sortOrder" xsi:type="number">310</item>
                     <item name="icon" xsi:type="string">fa fa-calendar</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -267,9 +267,9 @@
                 <item name="bfb_time" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Time Picker</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Time</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/time.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/time.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Control</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/time.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/time.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\Time</item>
                     <item name="sortOrder" xsi:type="number">312</item>
                     <item name="icon" xsi:type="string">far mgz-fa-clock</item>
@@ -288,10 +288,10 @@
                 <item name="bfb_file" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">File Upload</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\File</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/file.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/file.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\File</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\File</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/file.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/file.phtml</item>
                     <item name="sortOrder" xsi:type="number">314</item>
                     <item name="icon" xsi:type="string">fa fa-cloud-upload</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -310,9 +310,9 @@
                 <item name="bfb_number" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Number</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Number</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/number.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/number.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Number</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/number.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/number.phtml</item>
                     <item name="sortOrder" xsi:type="number">316</item>
                     <item name="icon" xsi:type="string">mgz-icon mgz-icon-number-field</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -332,9 +332,9 @@
                 <item name="bfb_address" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Address</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Address</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/address.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/address.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Address</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/address.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/address.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\Address</item>
                     <item name="sortOrder" xsi:type="number">318</item>
                     <item name="icon" xsi:type="string">far mgz-fa-address-card</item>
@@ -354,8 +354,8 @@
                     <item name="name" xsi:type="string" translate="true">Star Ratings</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\StarRatings</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\StarRatings</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/star-ratings.html</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/star-ratings.phtml</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/star-ratings.html</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/star-ratings.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\StarRatings</item>
                     <item name="sortOrder" xsi:type="number">320</item>
                     <item name="icon" xsi:type="string">far mgz-fa-star</item>
@@ -376,9 +376,9 @@
                 <item name="bfb_website" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Website</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Website</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/text.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Control</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/website.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/website.phtml</item>
                     <item name="sortOrder" xsi:type="number">322</item>
                     <item name="icon" xsi:type="string">fa fa-link</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -398,8 +398,8 @@
                     <item name="name" xsi:type="string" translate="true">Single Checkbox</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\SingleCheckbox</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\SingleCheckbox</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/single-checkbox.html</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/single-checkbox.phtml</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/single-checkbox.html</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/single-checkbox.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\SingleCheckbox</item>
                     <item name="sortOrder" xsi:type="number">324</item>
                     <item name="icon" xsi:type="string">fa fa-check-square-o</item>
@@ -420,8 +420,8 @@
                     <item name="name" xsi:type="string" translate="true">Submit</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Submit</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Submit</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/submit.html</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/submit.phtml</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/submit.html</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/submit.phtml</item>
                     <item name="sortOrder" xsi:type="number">326</item>
                     <item name="icon" xsi:type="string">mgz-icon mgz-icon-button</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -436,9 +436,9 @@
                 <item name="bfb_select" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Select</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Select</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/select.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/select.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Control</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/select.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/select.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\Select</item>
                     <item name="sortOrder" xsi:type="number">328</item>
                     <item name="icon" xsi:type="string">fa fa-check</item>
@@ -458,9 +458,9 @@
                 <item name="bfb_multiselect" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Multiple Select</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\MultipleSelect</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/multiselect.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/multiselect.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\MultipleSelect</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/multiselect.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/multiselect.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\MultipleSelect</item>
                     <item name="sortOrder" xsi:type="number">330</item>
                     <item name="icon" xsi:type="string">fa fa-list</item>
@@ -480,9 +480,9 @@
                 <item name="bfb_checkboxlist" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Checkbox List</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\CheckboxList</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/checkbox_list.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/checkbox_list.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Control</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/checkbox_list.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/checkbox_list.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\MultipleSelect</item>
                     <item name="sortOrder" xsi:type="number">332</item>
                     <item name="icon" xsi:type="string">mgz-icon mgz-icon-checkbox</item>
@@ -502,9 +502,9 @@
                 <item name="bfb_radiolist" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Radio List</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\RadioList</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/radio_list.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/radio_list.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Control</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/radio_list.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/radio_list.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\RadioList</item>
                     <item name="sortOrder" xsi:type="number">334</item>
                     <item name="icon" xsi:type="string">mgz-icon mgz-icon-icon-list</item>
@@ -525,8 +525,8 @@
                     <item name="name" xsi:type="string" translate="true">Choice Matrix</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\ChoiceMatrix</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\ChoiceMatrix</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/choice_matrix.html</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/choice_matrix.phtml</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/choice_matrix.html</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/choice_matrix.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\ChoiceMatrix</item>
                     <item name="sortOrder" xsi:type="number">336</item>
                     <item name="icon" xsi:type="string">fa fa-th</item>
@@ -547,8 +547,8 @@
                     <item name="name" xsi:type="string" translate="true">Single Slider</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\SingleSlider</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\SingleSlider</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/single_slider.html</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/single_slider.phtml</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/single_slider.html</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/single_slider.phtml</item>
                     <item name="sortOrder" xsi:type="number">338</item>
                     <item name="icon" xsi:type="string">fa fa-sliders</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -568,9 +568,9 @@
                 <item name="bfb_magento2_captcha" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Magento2 Captcha</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Magento2Captcha</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/magento2_captcha.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/magento2_captcha.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Magento2Captcha</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/magento2_captcha.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/magento2_captcha.phtml</item>
                     <item name="sortOrder" xsi:type="number">340</item>
                     <item name="icon" xsi:type="string">fab mgz-fa-magento</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -584,10 +584,10 @@
                 <item name="bfb_recaptcha" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">ReCaptcha</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Recaptcha</item>
-                    <item name="templateUrl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/control.html</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/recaptcha.html</item>
+                    <item name="templateUrl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/control.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/recaptcha.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Recaptcha</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/recaptcha.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/recaptcha.phtml</item>
                     <item name="sortOrder" xsi:type="number">342</item>
                     <item name="icon" xsi:type="string">mgz-icon mgz-icon-product</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -601,9 +601,9 @@
                 <item name="bfb_currency" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Currency</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Currency</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/text.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Control</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/currency.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/currency.phtml</item>
                     <item name="sortOrder" xsi:type="number">344</item>
                     <item name="icon" xsi:type="string">fa fa-dollar</item>
                     <item name="group" xsi:type="string">bfb</item>
@@ -627,8 +627,8 @@
                     <item name="name" xsi:type="string" translate="true">Toggle</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Toggle</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Toggle</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/toggle.html</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/toggle.phtml</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/toggle.html</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/toggle.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\Toggle</item>
                     <item name="sortOrder" xsi:type="number">346</item>
                     <item name="icon" xsi:type="string">fa fa-toggle-on</item>
@@ -648,9 +648,9 @@
                 <item name="bfb_phone" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Phone</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Phone</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/text.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/text.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Control</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/phone.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/phone.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\Phone</item>
                     <item name="sortOrder" xsi:type="number">348</item>
                     <item name="icon" xsi:type="string">fa fa-phone</item>
@@ -670,9 +670,9 @@
                 <item name="bfb_subscribe" xsi:type="array">
                     <item name="name" xsi:type="string" translate="true">Subscribe</item>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Data\Element\Subscribe</item>
-                    <item name="elementTmpl" xsi:type="string">BlueFormBuilder_Core/js/templates/builder/element/single-checkbox.html</item>
+                    <item name="elementTmpl" xsi:type="string">Cytracon_BlueFormBuilderCore/js/templates/builder/element/single-checkbox.html</item>
                     <item name="block" xsi:type="string">Cytracon\BlueFormBuilderCore\Block\Element\Control</item>
-                    <item name="template" xsi:type="string">BlueFormBuilder_Core::element/subscribe.phtml</item>
+                    <item name="template" xsi:type="string">Cytracon_BlueFormBuilderCore::element/subscribe.phtml</item>
                     <item name="model" xsi:type="string">Cytracon\BlueFormBuilderCore\Model\Element\Subscribe</item>
                     <item name="sortOrder" xsi:type="number">350</item>
                     <item name="group" xsi:type="string">bfb</item>

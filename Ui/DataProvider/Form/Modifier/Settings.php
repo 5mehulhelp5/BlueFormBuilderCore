@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -412,7 +412,7 @@ class Settings extends AbstractModifier
 
             $advanced->addChildren('disable_multiple_fields', 'select', [
                 'label'        => __('Form Fields'),
-                'component'    => 'BlueFormBuilder_Core/js/form/builder-fields',
+                'component'    => 'Cytracon_BlueFormBuilderCore/js/form/builder-fields',
                 'sortOrder'    => 50,
                 'filterType'   => 'condition',
                 'disableLabel' => true,

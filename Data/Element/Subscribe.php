@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -93,7 +93,7 @@ class Subscribe extends AbstractElement
                     'key'             => 'subscribe_fields',
                     'templateOptions' => [
                         'multiple' => true,
-                        'element'  => 'BlueFormBuilder_Core/js/modal/element/subscribe-fields',
+                        'element'  => 'Cytracon_BlueFormBuilderCore/js/modal/element/subscribe-fields',
                         'label'    => __('Add field value to the Newsletter List')
                     ]
                 ]

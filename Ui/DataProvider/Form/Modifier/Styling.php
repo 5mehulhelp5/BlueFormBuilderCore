@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -185,7 +185,7 @@ class Styling extends AbstractModifier
                                 'initializeFieldsetDataByDefault' => false,
                                 'sortOrder'                       => static::GROUP_STYLING_DEFAULT_SORT_ORDER,
                                 'additionalClasses'               => 'bfb-styling',
-                                'template'                        => 'BlueFormBuilder_Core/form/edit/styling',
+                                'template'                        => 'Cytracon_BlueFormBuilderCore/form/edit/styling',
                                 'dataScope'                       => 'data'
                             ]
                         ]
@@ -208,7 +208,7 @@ class Styling extends AbstractModifier
             [
                 'sortOrder'   => 0,
                 'displayArea' => 'simply',
-                'component'   => 'BlueFormBuilder_Core/js/modal/element/design-simply',
+                'component'   => 'Cytracon_BlueFormBuilderCore/js/modal/element/design-simply',
                 'links'       => [
                     self::FIELD_MARGIN_LEFT  => '${ $.provider }:${ $.parentScope }.' . self::FIELD_MARGIN_LEFT . ':changed',
                     self::FIELD_BORDER_LEFT  => '${ $.provider }:${ $.parentScope }.' . self::FIELD_BORDER_LEFT . ':changed',

@@ -9,7 +9,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
@@ -64,7 +64,7 @@
                 <item name="config" xsi:type="array">
                     <item name="label" xsi:type="string"/>
                     <item name="class" xsi:type="string">Cytracon\BlueFormBuilderCore\Ui\Component\Form\Element\Builder</item>
-                    <item name="component" xsi:type="string">BlueFormBuilder_Core/js/builder</item> 
+                    <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/builder</item> 
                     <item name="formElement" xsi:type="string">textarea</item>
                     <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
                     <item name="ajax_data" xsi:type="array">
@@ -141,7 +141,7 @@
                             <item name="dataType" xsi:type="string">string</item>
                             <item name="formElement" xsi:type="string">input</item>
                             <item name="label" xsi:type="string" translate="true">Sender Name</item>
-                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item> 
+                            <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/form/input-smart-variables</item> 
                             <item name="validation" xsi:type="array">
                                 <item name="required-entry" xsi:type="boolean">true</item>
                             </item>
@@ -158,7 +158,7 @@
                             <item name="dataType" xsi:type="string">string</item>
                             <item name="formElement" xsi:type="string">input</item>
                             <item name="label" xsi:type="string" translate="true">Sender Email</item>
-                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item> 
+                            <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/form/input-smart-variables</item> 
                             <item name="validation" xsi:type="array">
                                 <item name="required-entry" xsi:type="boolean">true</item>
                             </item>
@@ -175,7 +175,7 @@
                             <item name="dataType" xsi:type="string">string</item>
                             <item name="formElement" xsi:type="string">input</item>
                             <item name="label" xsi:type="string" translate="true">Reply To</item>
-                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item>
+                            <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/form/input-smart-variables</item>
                             <item name="validation" xsi:type="array">
                                 <item name="validate-email" xsi:type="boolean">false</item>
                             </item>
@@ -223,7 +223,7 @@
                             <item name="dataType" xsi:type="string">string</item>
                             <item name="formElement" xsi:type="string">input</item>
                             <item name="label" xsi:type="string" translate="true">Email Subject</item>
-                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item> 
+                            <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/form/input-smart-variables</item> 
                             <item name="validation" xsi:type="array">
                                 <item name="required-entry" xsi:type="boolean">true</item>
                             </item>
@@ -252,7 +252,7 @@
                     <argument name="data" xsi:type="array">
                         <item name="config" xsi:type="array">
                             <item name="class" xsi:type="string">\Magento\Ui\Component\Form\Element\Wysiwyg</item>
-                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/smart-variables</item>
+                            <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/form/smart-variables</item>
                             <item name="additionalClasses" xsi:type="string">bfb-smart-variables-editor</item>
                             <item name="editorMode" xsi:type="boolean">true</item>
                             <item name="label" xsi:type="string" translate="true">Email Body</item>
@@ -397,7 +397,7 @@
                         <item name="config" xsi:type="array">
                             <item name="formElement" xsi:type="string">input</item>
                             <item name="label" xsi:type="string" translate="true">Email Subject</item>
-                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/input-smart-variables</item>
+                            <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/form/input-smart-variables</item>
                             <item name="dataType" xsi:type="string">string</item>
                             <item name="sortOrder" xsi:type="number">60</item>
                             <item name="validation" xsi:type="array">
@@ -429,7 +429,7 @@
                     <argument name="data" xsi:type="array">
                         <item name="config" xsi:type="array">
                             <item name="class" xsi:type="string">\Magento\Ui\Component\Form\Element\Wysiwyg</item>
-                            <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/smart-variables</item>
+                            <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/form/smart-variables</item>
                             <item name="additionalClasses" xsi:type="string">bfb-smart-variables-editor</item>
                             <item name="editorMode" xsi:type="boolean">true</item>
                             <item name="label" xsi:type="string" translate="true">Email Body</item>
@@ -502,7 +502,7 @@
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
                         <item name="class" xsi:type="string">\Magento\Ui\Component\Form\Element\Wysiwyg</item>
-                        <item name="component" xsi:type="string">BlueFormBuilder_Core/js/form/smart-variables</item>
+                        <item name="component" xsi:type="string">Cytracon_BlueFormBuilderCore/js/form/smart-variables</item>
                         <item name="additionalClasses" xsi:type="string">bfb-smart-variables-editor</item>
                         <item name="editorMode" xsi:type="boolean">true</item>
                         <item name="formElement" xsi:type="string">wysiwyg</item>

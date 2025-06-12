@@ -2,7 +2,7 @@ define([
     'ko',
     'jquery',
     'uiComponent',
-    'BlueFormBuilder_Core/js/jquery.inputmask.bundle.min'
+    'Cytracon_BlueFormBuilderCore/js/jquery.inputmask.bundle.min'
 ], function (ko, $, Component) {
     'use strict';
 

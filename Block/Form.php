@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -19,7 +19,7 @@ class Form extends \Magento\Framework\View\Element\Template
     /**
      * @var string
      */
-    protected $_template = 'BlueFormBuilder_Core::form/view.phtml';
+    protected $_template = 'Cytracon_BlueFormBuilderCore::form/view.phtml';
 
     /**
      * @var Cytracon\BlueFormBuilderCore\Model\Form
@@ -244,7 +244,7 @@ class Form extends \Magento\Framework\View\Element\Template
         $jsAfterSubmit  = $form->getJsAfterSubmit();
         $submission     = $this->getCurrentSubmission();
         $id             = $form->getRandomId();
-        $result['BlueFormBuilder_Core/js/form'] = [
+        $result['Cytracon_BlueFormBuilderCore/js/form'] = [
             'formElements'       => $this->getFormElements(),
             'validCurrentPage'   => true,
             'ajaxLoadSectionUrl' => $this->getUrl('blueformbuilder/section/load'),

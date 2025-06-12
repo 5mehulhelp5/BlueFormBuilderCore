@@ -9,7 +9,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
@@ -19,62 +19,62 @@
     <route url="/V1/formBuilderForm/:formId" method="GET">
         <service class="Cytracon\BlueFormBuilderCore\Api\FormRepositoryInterface" method="get"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::form"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::form"/>
         </resources>
     </route>
     <route url="/V1/formBuilderForm/search" method="GET">
         <service class="Cytracon\BlueFormBuilderCore\Api\FormRepositoryInterface" method="getList"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::form"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::form"/>
         </resources>
     </route>
     <route url="/V1/formBuilderForm" method="POST">
         <service class="Cytracon\BlueFormBuilderCore\Api\FormRepositoryInterface" method="save"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::form"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::form"/>
         </resources>
     </route>
     <route url="/V1/formBuilderForm/:id" method="PUT">
         <service class="Cytracon\BlueFormBuilderCore\Api\FormRepositoryInterface" method="save"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::form"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::form"/>
         </resources>
     </route>
     <route url="/V1/formBuilderForm/:formId" method="DELETE">
         <service class="Cytracon\BlueFormBuilderCore\Api\FormRepositoryInterface" method="deleteById"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::form"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::form"/>
         </resources>
     </route>
     <!-- Submission -->
    <route url="/V1/formBuilderSubmission/:submissionId" method="GET">
         <service class="Cytracon\BlueFormBuilderCore\Api\SubmissionRepositoryInterface" method="get"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::submission"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::submission"/>
         </resources>
     </route>
     <route url="/V1/formBuilderSubmission/search" method="GET">
         <service class="Cytracon\BlueFormBuilderCore\Api\SubmissionRepositoryInterface" method="getList"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::submission"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::submission"/>
         </resources>
     </route>
     <route url="/V1/formBuilderSubmission" method="POST">
         <service class="Cytracon\BlueFormBuilderCore\Api\SubmissionRepositoryInterface" method="save"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::submission"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::submission"/>
         </resources>
     </route>
     <route url="/V1/formBuilderSubmission/:id" method="PUT">
         <service class="Cytracon\BlueFormBuilderCore\Api\SubmissionRepositoryInterface" method="save"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::submission"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::submission"/>
         </resources>
     </route>
     <route url="/V1/formBuilderSubmission/:submissionId" method="DELETE">
         <service class="Cytracon\BlueFormBuilderCore\Api\SubmissionRepositoryInterface" method="deleteById"/>
         <resources>
-            <resource ref="BlueFormBuilder_Core::submission"/>
+            <resource ref="Cytracon_BlueFormBuilderCore::submission"/>
         </resources>
     </route>
 </routes>

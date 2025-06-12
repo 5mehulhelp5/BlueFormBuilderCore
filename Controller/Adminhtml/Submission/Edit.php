@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -21,7 +21,7 @@ class Edit extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'BlueFormBuilder_Core::submission';
+    const ADMIN_RESOURCE = 'Cytracon_BlueFormBuilderCore::submission';
 
     /**
      * Core registry
@@ -60,7 +60,7 @@ class Edit extends \Magento\Backend\App\Action
         // load layout, set active menu and breadcrumbs
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('BlueFormBuilder_Core::formbuilder');
+        $resultPage->setActiveMenu('Cytracon_BlueFormBuilderCore::formbuilder');
         $resultPage->addBreadcrumb(__('Manage Submissions'), __('Manage Submissions'));
         return $resultPage;
     }

@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -27,7 +27,7 @@ class Number extends Control
 		$min          = $element->getData('min');
 		$max          = $element->getData('max');
 		$result = [
-			'component' => 'BlueFormBuilder_Core/js/form/element/number',
+			'component' => 'Cytracon_BlueFormBuilderCore/js/form/element/number',
 			'default'   => $defaultValue ? $defaultValue : 0,
 			'step'      => $step ? $step : 1,
 			'min'       => $min,

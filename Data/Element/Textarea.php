@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -196,8 +196,8 @@ class Textarea extends AbstractElement
 					'key'             => self::FIELD_DEFAULT_VALUE,
 					'templateOptions' => [
 						'label'       => __('Default Value'),
-						'element'     => 'BlueFormBuilder_Core/js/modal/element/smart-fields',
-						'templateUrl' => 'BlueFormBuilder_Core/js/templates/modal/form/element/textarea_smart_variables.html'
+						'element'     => 'Cytracon_BlueFormBuilderCore/js/modal/element/smart-fields',
+						'templateUrl' => 'Cytracon_BlueFormBuilderCore/js/templates/modal/form/element/textarea_smart_variables.html'
 	                ]
 	            ]
 	        );

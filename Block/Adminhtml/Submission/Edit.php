@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -48,12 +48,12 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
     protected function _construct()
     {
         $this->_objectId   = 'submission_id';
-        $this->_blockGroup = 'BlueFormBuilder_Core';
+        $this->_blockGroup = 'Cytracon_BlueFormBuilderCore';
         $this->_controller = 'adminhtml_submission';
 
         parent::_construct();
 
-        if (!$this->_isAllowedAction('BlueFormBuilder_Core::submission_delete')) {
+        if (!$this->_isAllowedAction('Cytracon_BlueFormBuilderCore::submission_delete')) {
             $this->buttonList->remove('delete');
         }
 
@@ -77,7 +77,7 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             1
         );
 
-        if ($this->_isAllowedAction('BlueFormBuilder_Core::submission_save')) {
+        if ($this->_isAllowedAction('Cytracon_BlueFormBuilderCore::submission_save')) {
             $this->addButton(
                 'edit',
                 [

@@ -8,7 +8,7 @@ define([
 		return {
       		replace: true,
 			templateUrl: function(elem) {
-				return cytraconBuilderUrl.getTemplateUrl(elem, 'BlueFormBuilder_Core/js/templates/builder/field.html');
+				return cytraconBuilderUrl.getTemplateUrl(elem, 'Cytracon_BlueFormBuilderCore/js/templates/builder/field.html');
 			},
 			controller: function($scope,  $controller) {
 				var parent = $controller('baseController', {$scope: $scope});

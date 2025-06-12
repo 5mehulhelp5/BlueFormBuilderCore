@@ -9,7 +9,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
@@ -28,7 +28,7 @@
                 <item name="url" xsi:type="string">*/*/new</item>
             </item>
         </item>
-        <item name="acl" xsi:type="string">BlueFormBuilder_Core::form</item>
+        <item name="acl" xsi:type="string">Cytracon_BlueFormBuilderCore::form</item>
     </argument>
     <dataSource name="blueformbuilder_form_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">

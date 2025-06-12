@@ -9,7 +9,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
@@ -20,7 +20,7 @@
             <item name="deps" xsi:type="string">blueformbuilder_submission_listing.blueformbuilder_submission_listing_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">blueformbuilder_submission_columns</item>
-        <item name="acl" xsi:type="string">BlueFormBuilder_Core::submission</item>
+        <item name="acl" xsi:type="string">Cytracon_BlueFormBuilderCore::submission</item>
     </argument>
     <dataSource name="blueformbuilder_submission_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">

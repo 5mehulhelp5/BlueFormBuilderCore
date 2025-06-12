@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -21,7 +21,7 @@ class Index extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'BlueFormBuilder_Core::form';
+    const ADMIN_RESOURCE = 'Cytracon_BlueFormBuilderCore::form';
 
     /**
      * File uploads action
@@ -31,7 +31,7 @@ class Index extends \Magento\Backend\App\Action
     public function execute()
     {
         $this->_view->loadLayout();
-        $this->_setActiveMenu('BlueFormBuilder_Core::formbuilder');
+        $this->_setActiveMenu('Cytracon_BlueFormBuilderCore::formbuilder');
         $this->_view->getPage()->getConfig()->getTitle()->prepend(__('File Uploads'));
         $this->_view->renderLayout();
     }

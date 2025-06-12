@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -38,12 +38,12 @@ class DefaultConfigProvider extends \Cytracon\Builder\Model\DefaultConfigProvide
 		foreach ($config['elements'] as &$element) {
 		 	if (isset($element['area']) && in_array('bfb', $element['area'])) {
 	 			if (!isset($element['element']) || !$element['element']) {
-	 				$element['element'] = 'BlueFormBuilder_Core/js/builder/field';
+	 				$element['element'] = 'Cytracon_BlueFormBuilderCore/js/builder/field';
 			 		if (!isset($element['templateUrl']) || !$element['templateUrl']) {
 					 	if (isset($element['control']) && $element['control']) {
-					 		$element['templateUrl'] = 'BlueFormBuilder_Core/js/templates/builder/control.html';
+					 		$element['templateUrl'] = 'Cytracon_BlueFormBuilderCore/js/templates/builder/control.html';
 					 	} else {
-					 		$element['templateUrl'] = 'BlueFormBuilder_Core/js/templates/builder/field.html';
+					 		$element['templateUrl'] = 'Cytracon_BlueFormBuilderCore/js/templates/builder/field.html';
 					 	}
 					}
 	 			}
@@ -78,12 +78,12 @@ class DefaultConfigProvider extends \Cytracon\Builder\Model\DefaultConfigProvide
 	// 	foreach ($config['elements'] as &$element) {
 	// 	 	if (in_array('bfb', $element['area'])) {
 	//  			if (!isset($element['element']) || !$element['element']) {
-	//  				$element['element'] = 'BlueFormBuilder_Core/js/builder/field';
+	//  				$element['element'] = 'Cytracon_BlueFormBuilderCore/js/builder/field';
 	// 		 		if (!isset($element['templateUrl']) || !$element['templateUrl']) {
 	// 				 	if (isset($element['control']) && $element['control']) {
-	// 				 		$element['templateUrl'] = 'BlueFormBuilder_Core/js/templates/builder/control.html';
+	// 				 		$element['templateUrl'] = 'Cytracon_BlueFormBuilderCore/js/templates/builder/control.html';
 	// 				 	} else {
-	// 				 		$element['templateUrl'] = 'BlueFormBuilder_Core/js/templates/builder/field.html';
+	// 				 		$element['templateUrl'] = 'Cytracon_BlueFormBuilderCore/js/templates/builder/field.html';
 	// 				 	}
 	// 				}
 	//  			}

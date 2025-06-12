@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -143,8 +143,8 @@ class Email extends AbstractElement
 					'defaultValue'    => '[customer.email]',
 					'templateOptions' => [
 						'label'       => __('Default Value'),
-						'templateUrl' => 'BlueFormBuilder_Core/js/templates/modal/form/element/smart_variables.html',
-						'element'     => 'BlueFormBuilder_Core/js/modal/element/smart-fields',
+						'templateUrl' => 'Cytracon_BlueFormBuilderCore/js/templates/modal/form/element/smart_variables.html',
+						'element'     => 'Cytracon_BlueFormBuilderCore/js/modal/element/smart-fields',
 	                ]
 	            ]
 	        );

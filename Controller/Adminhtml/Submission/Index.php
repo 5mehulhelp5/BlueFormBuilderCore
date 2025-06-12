@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -21,7 +21,7 @@ class Index extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'BlueFormBuilder_Core::submission';
+    const ADMIN_RESOURCE = 'Cytracon_BlueFormBuilderCore::submission';
 
     /**
      * @var \Magento\Framework\View\Result\PageFactory
@@ -49,7 +49,7 @@ class Index extends \Magento\Backend\App\Action
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->setActiveMenu('BlueFormBuilder_Core::formbuilder');
+        $resultPage->setActiveMenu('Cytracon_BlueFormBuilderCore::formbuilder');
         $resultPage->getConfig()->getTitle()->prepend(__('Form Submissions'));
         return $resultPage;
     }

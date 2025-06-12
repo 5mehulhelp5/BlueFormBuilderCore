@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -24,7 +24,7 @@ class ExportSubmissionExcel extends \Cytracon\BlueFormBuilderCore\Controller\Adm
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'BlueFormBuilder_Core::form';
+    const ADMIN_RESOURCE = 'Cytracon_BlueFormBuilderCore::form';
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\DateTime

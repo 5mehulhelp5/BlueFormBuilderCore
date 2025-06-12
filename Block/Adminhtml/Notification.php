@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -79,7 +79,7 @@ class Notification extends \Magento\Framework\View\Element\Template
 
     public function toHtml()
     {
-        if (!$this->_authorization->isAllowed('BlueFormBuilder_Core::submission')) {
+        if (!$this->_authorization->isAllowed('Cytracon_BlueFormBuilderCore::submission')) {
             return;
         }
         return parent::toHtml();

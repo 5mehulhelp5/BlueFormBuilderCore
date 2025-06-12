@@ -1,6 +1,6 @@
 define([
     'underscore',
-    'BlueFormBuilder_Core/js/form/builder-fields'
+    'Cytracon_BlueFormBuilderCore/js/form/builder-fields'
 ], function (_, Field) {
     'use strict';
 

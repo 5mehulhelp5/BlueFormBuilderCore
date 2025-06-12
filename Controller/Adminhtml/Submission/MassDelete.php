@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -26,7 +26,7 @@ class MassDelete extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'BlueFormBuilder_Core::submission_delete';
+    const ADMIN_RESOURCE = 'Cytracon_BlueFormBuilderCore::submission_delete';
 
     /**
      * @var Filter

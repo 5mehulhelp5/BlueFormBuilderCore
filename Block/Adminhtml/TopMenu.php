@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -87,36 +87,36 @@ class TopMenu extends \Magento\Framework\View\Element\Template
                 [
                     'title'    => __('Add New Form'),
                     'link'     => $this->getUrl('blueformbuilder/form/new'),
-                    'resource' => 'BlueFormBuilder_Core::form_save',
+                    'resource' => 'Cytracon_BlueFormBuilderCore::form_save',
                     'class'    => 'bfb-add-new'
                 ],
                 [
                     'title'    => __('Manage Forms'),
                     'link'     => $this->getUrl('blueformbuilder/form/index'),
-                    'resource' => 'BlueFormBuilder_Core::form'
+                    'resource' => 'Cytracon_BlueFormBuilderCore::form'
                 ],
                 [
                     'title'    => __('Plugins'),
                     'link'     => $this->getUrl('blueformbuilder/form/new'),
-                    'resource' => 'BlueFormBuilder_Core::form_save',
+                    'resource' => 'Cytracon_BlueFormBuilderCore::form_save',
                     'class'    => 'bfb-plugins'
                 ],
                 [
                     'title'    => __('File Uploads'),
                     'link'     => $this->getUrl('blueformbuilder/files'),
-                    'resource' => 'BlueFormBuilder_Core::form_save'
+                    'resource' => 'Cytracon_BlueFormBuilderCore::form_save'
                 ],
                 [
                     'title'    => __('Settings'),
                     'link'     => $this->getUrl('adminhtml/system_config/edit/section/blueformbuilder'),
-                    'resource' => 'BlueFormBuilder_Core::settings'
+                    'resource' => 'Cytracon_BlueFormBuilderCore::settings'
                 ]
             ],
             [
                 [
                     'title'    => __('Form Submissions'),
                     'link'     => $this->getUrl('blueformbuilder/submission/index'),
-                    'resource' => 'BlueFormBuilder_Core::submission',
+                    'resource' => 'Cytracon_BlueFormBuilderCore::submission',
                     'class'    => 'bfb-submissions'
                 ]
             ],

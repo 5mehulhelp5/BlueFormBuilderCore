@@ -94,7 +94,7 @@ $yearRange = $element->getData('year_range');
 <?php if (!$element->getData('readonly')) {?>
 <script type="text/javascript">
 require(['jquery','mage/calendar',
-	<?php if ($dateLanguage !== 'en') {?>'BlueFormBuilder_Core/js/ui/i18n/datepicker-<?=$dateLanguage;?>'<?php }?>
+	<?php if ($dateLanguage !== 'en') {?>'Cytracon_BlueFormBuilderCore/js/ui/i18n/datepicker-<?=$dateLanguage;?>'<?php }?>
 	], function($) {
 		$(document).ready(function($) {
 			var daysAllowed = <?=$coreHelper->serialize($daysAllowed);?>;

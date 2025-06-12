@@ -179,7 +179,7 @@ define([
             filterOptionsFocus: false,
             filterInputValue: '',
             service: {
-                template: 'BlueFormBuilder_Core/form/smart-variables'
+                template: 'Cytracon_BlueFormBuilderCore/form/smart-variables'
             },
             cols: 15,
             rows: 2,

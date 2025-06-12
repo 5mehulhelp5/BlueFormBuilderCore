@@ -17,13 +17,13 @@
   if (typeof define === "function" && define.amd) {
     // Register as an anonymous AMD module:
     define([
-      "BlueFormBuilder_Core/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image",
-      "BlueFormBuilder_Core/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image-meta",
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image",
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image-meta",
     ], factory);
   } else if (typeof module === "object" && module.exports) {
     factory(
-      require("BlueFormBuilder_Core/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image"),
-      require("BlueFormBuilder_Core/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image-meta")
+      require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image"),
+      require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image-meta")
     );
   } else {
     // Browser globals:

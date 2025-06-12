@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -23,7 +23,7 @@ class Save extends Generic
      */
     public function getButtonData()
     {
-        if (!$this->_isAllowedAction('BlueFormBuilder_Core::form_save')) {
+        if (!$this->_isAllowedAction('Cytracon_BlueFormBuilderCore::form_save')) {
             return [];
         }
 

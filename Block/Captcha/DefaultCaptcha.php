@@ -8,7 +8,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
@@ -16,7 +16,7 @@ namespace Cytracon\BlueFormBuilderCore\Block\Captcha;
 
 class DefaultCaptcha extends \Magento\Captcha\Block\Captcha\DefaultCaptcha
 {
-	protected $_template = 'BlueFormBuilder_Core::captcha.phtml';
+	protected $_template = 'Cytracon_BlueFormBuilderCore::captcha.phtml';
 
     /**
      * Renders captcha HTML (if required)

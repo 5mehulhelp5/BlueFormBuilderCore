@@ -18,13 +18,13 @@
     // Register as an anonymous AMD module:
     define([
       "jquery",
-      "BlueFormBuilder_Core/js/jquery/fileUploader/vendor/jquery.ui.widget",
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/jquery.ui.widget",
     ], factory);
   } else if (typeof exports === "object") {
     // Node/CommonJS:
     factory(
       require("jquery"),
-      require("BlueFormBuilder_Core/js/jquery/fileUploader/vendor/jquery.ui.widget")
+      require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/jquery.ui.widget")
     );
   } else {
     // Browser globals:

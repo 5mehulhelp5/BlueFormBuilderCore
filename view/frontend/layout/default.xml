@@ -9,7 +9,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
@@ -17,7 +17,7 @@
 	<head>
 		<css src="Cytracon_Core::css/magnific.css"/>
 		<css src="Cytracon_Core::css/ionslider.css"/>
-		<css src="BlueFormBuilder_Core::css/intlTelInput.min.css"/>
+		<css src="Cytracon_BlueFormBuilderCore::css/intlTelInput.min.css"/>
     </head>
 	<body>
 		<referenceBlock name="header.links">

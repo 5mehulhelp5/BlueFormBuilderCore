@@ -9,14 +9,14 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<body>
 		<referenceContainer name="head.additional">
-			<block class="Magento\Catalog\Block\Product\View" name="bfb.form.productprovider" template="BlueFormBuilder_Core::product/view.phtml"/>
+			<block class="Magento\Catalog\Block\Product\View" name="bfb.form.productprovider" template="Cytracon_BlueFormBuilderCore::product/view.phtml"/>
 		</referenceContainer>
 	</body>
 </page>

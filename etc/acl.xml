@@ -9,7 +9,7 @@
  * Please refer to https://www.cytracon.com for more information.
  *
  * @category  BlueFormBuilder
- * @package   BlueFormBuilder_Core
+ * @package   Cytracon_BlueFormBuilderCore
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
@@ -18,21 +18,21 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::content">
-                    <resource id="BlueFormBuilder_Core::blueformbuilder" title="BlueFormBuilder" sortOrder="10">
-                        <resource id="BlueFormBuilder_Core::form" title="Form" translate="title" sortOrder="10">
-                            <resource id="BlueFormBuilder_Core::form_save" title="Save Form" sortOrder="10" />
-                            <resource id="BlueFormBuilder_Core::form_delete" title="Delete Form" sortOrder="20" />
+                    <resource id="Cytracon_BlueFormBuilderCore::blueformbuilder" title="BlueFormBuilder" sortOrder="10">
+                        <resource id="Cytracon_BlueFormBuilderCore::form" title="Form" translate="title" sortOrder="10">
+                            <resource id="Cytracon_BlueFormBuilderCore::form_save" title="Save Form" sortOrder="10" />
+                            <resource id="Cytracon_BlueFormBuilderCore::form_delete" title="Delete Form" sortOrder="20" />
                         </resource>
-                        <resource id="BlueFormBuilder_Core::submission" title="Submission" translate="title" sortOrder="20">
-                            <resource id="BlueFormBuilder_Core::submission_save" title="Save Submission" sortOrder="10" />
-                            <resource id="BlueFormBuilder_Core::submission_delete" title="Delete Submission" sortOrder="20" />
+                        <resource id="Cytracon_BlueFormBuilderCore::submission" title="Submission" translate="title" sortOrder="20">
+                            <resource id="Cytracon_BlueFormBuilderCore::submission_save" title="Save Submission" sortOrder="10" />
+                            <resource id="Cytracon_BlueFormBuilderCore::submission_delete" title="Delete Submission" sortOrder="20" />
                         </resource>
                     </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="BlueFormBuilder_Core::settings" title="BlueFormBuilder" translate="title" />
+                            <resource id="Cytracon_BlueFormBuilderCore::settings" title="BlueFormBuilder" translate="title" />
                         </resource>
                     </resource>
                 </resource>
