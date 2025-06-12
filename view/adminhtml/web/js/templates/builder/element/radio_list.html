@@ -2,7 +2,7 @@
     <div class="admin__field-option bfb-radio-item bfb-choices-item {{ option.default ? 'option-selected' : '' }}" ng-repeat="option in element.options">
     	<label for="{{ element.id }}option{{ $index }}">
 			<div class="bfb-choices-image" ng-if="option.image">
-				<img ng-if="option.image" ng-src="{{ $root.magezonBuilderUrl.getImageUrl(option.image) }}" width="{{ element. image_width}}" height="{{ element. image_height}}"/>
+				<img ng-if="option.image" ng-src="{{ $root.cytraconBuilderUrl.getImageUrl(option.image) }}" width="{{ element. image_width}}" height="{{ element. image_height}}"/>
 			</div>
 			<input class="mgz-control-radio" type="radio" ng-checked="option.default" id="{{ element.id }}option{{ $index }}"/>
 			<label for="{{ element.id }}option{{ $index }}"></label> <span ng-bind-html="option.label"></span></span>
