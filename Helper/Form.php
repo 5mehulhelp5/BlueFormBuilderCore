@@ -336,24 +336,20 @@ class Form extends \Magento\Framework\App\Helper\AbstractHelper
         $table      = $this->_resource->getTableName('mgz_blueformbuilder_form');
         $identifier = $this->filterManager->translitUrl($identifier);
         $connection = $this->_resource->getConnection();
-        $select     = $connection->select()->from($table);
-        $forms      = $connection->fetchAll($select);
-        $x          = 1;
-        while (true) {
-            $validate = true;
-            foreach ($forms as $_form) {
-                if ($identifier === $_form['identifier']) {
-                    $validate   = false;
-                    $identifier = $identifier . $x;
-                    $x++;
-                }
-            }
-            if ($validate) {
-                break;
-            }
-        }
 
-        return $identifier;
+        // Hole alle existierenden Identifier
+        $select     = $connection->select()->from($table, ['identifier']);
+        $forms      = $connection->fetchCol($select);
+
+        // Basis-Identifier (ohne evtl. Suffix)
+        $baseIdentifier = preg_replace('/-\d+$/', '', $identifier);
+        $newIdentifier = $baseIdentifier;
+        $i = 1;
+        while (in_array($newIdentifier, $forms)) {
+            $newIdentifier = $baseIdentifier . '-' . $i;
+            $i++;
+        }
+        return $newIdentifier;
     }
 
     public function getFormTemplates()
