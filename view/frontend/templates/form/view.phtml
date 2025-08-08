@@ -78,6 +78,43 @@ $publicKey = $helper->getConfig('recaptcha3/public_key');
     </script>
 
     <script>
+        // Global jQuery selector guard: ignore invalid selectors like "#"
+        require(['jquery'], function ($) {
+            try {
+                var _find = $.fn.find;
+                $.fn.find = function (selector) {
+                    if (typeof selector === 'string' && selector.trim() === '#') {
+                        try { console.warn('BFB: Ignored invalid selector in find:', selector); } catch (e) {}
+                        return this.pushStack([]);
+                    }
+                    try {
+                        return _find.apply(this, arguments);
+                    } catch (e) {
+                        try { console.warn('BFB: Ignored invalid selector in find:', selector, e); } catch (_) {}
+                        return this.pushStack([]);
+                    }
+                };
+            } catch (e) {}
+
+            try {
+                var _sizzle = $.find;
+                $.find = function (selector) {
+                    if (typeof selector === 'string' && selector.trim() === '#') {
+                        try { console.warn('BFB: Ignored invalid selector:', selector); } catch (e) {}
+                        return [];
+                    }
+                    try {
+                        return _sizzle.apply(this, arguments);
+                    } catch (e) {
+                        try { console.warn('BFB: Ignored invalid selector:', selector, e); } catch (_) {}
+                        return [];
+                    }
+                };
+            } catch (e) {}
+        });
+    </script>
+
+    <script>
         (function () {
             // Enable/disable: localStorage.setItem('bfbDebug','1') / '0'
             var debug = (function () {
