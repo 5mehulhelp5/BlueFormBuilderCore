@@ -136,11 +136,10 @@ class Submission extends AbstractDb
         if ($field != $entityMetadata->getIdentifierField()) {
             $select = $this->_getLoadSelect($field, $value, $object);
             $select->reset(Select::COLUMNS)
-            ->columns($this->getMainTable() . '.' . $entityMetadata->getIdentifierField())
-            ->limit(1);
+                ->columns($this->getMainTable() . '.' . $entityMetadata->getIdentifierField())
+                ->limit(1);
             $result = $this->getConnection()->fetchCol($select);
-            $value  = count($result) ? $result[0] : $value;
-            $submissionId = count($result);
+            $submissionId = count($result) ? (int)$result[0] : $value;
         }
         return $submissionId;
     }
@@ -259,4 +258,5 @@ class Submission extends AbstractDb
             );
         return $hash;
     }
+}
 }

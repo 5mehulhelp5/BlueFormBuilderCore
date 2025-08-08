@@ -373,7 +373,7 @@ class EmailNotification extends DataObject
                 $submission = $this->getSubmission();
                 $transportBuilder = $this->transportBuilder;
                 $transportBuilder
-                    ->setTemplateIdentifier('176') // Use template ID 176
+                    ->setTemplateIdentifier('176') // keep existing identifier; ensure template exists
                     ->setTemplateOptions([
                         'area'  => \Magento\Framework\App\Area::AREA_FRONTEND,
                         'store' => $submission->getStoreId()
@@ -401,19 +401,26 @@ class EmailNotification extends DataObject
                     $transportBuilder->setReplyTo($senderEmail);
                 }
 
+                // Attach files via TransportBuilder (Laminas) instead of Symfony DataPart and before building transport
                 if ($attachments) {
                     $paths = [];
                     foreach ($attachments as $attachment) {
                         if (!in_array($attachment['path'], $paths) && file_exists($attachment['path'])) {
                             $fileName = $this->getFileFromPathFile($attachment['file']);
-                            $content = $this->file->read($attachment['path']);
+                            $content  = $this->file->read($attachment['path']);
+                            $mime     = $attachment['mime_type'] ?? ($attachment['mine_type'] ?? 'application/octet-stream');
+
                             $this->logger->debug('BlueFormBuilder EmailNotification: Adding attachment', [
                                 'file_name' => $fileName,
-                                'path' => $attachment['path']
+                                'path' => $attachment['path'],
+                                'mime' => $mime
                             ]);
-                            $transportBuilder->getTransport()->getMessage()->attach(
-                                \Symfony\Component\Mime\Part\DataPart::fromPath($attachment['path'], $fileName, $attachment['mine_type'])
-                            );
+
+                            // Magento core method to add attachment (uses Laminas\Mime\Part internally)
+                            if (method_exists($transportBuilder, 'addAttachment')) {
+                                $transportBuilder->addAttachment($content, $fileName, $mime);
+                            }
+
                             $paths[] = $attachment['path'];
                         } else {
                             $this->logger->error('BlueFormBuilder EmailNotification: Attachment file missing', [
@@ -428,7 +435,8 @@ class EmailNotification extends DataObject
                     ['submission' => $submission, 'type' => $type, 'obj' => $this, 'transport' => $transportBuilder]
                 );
 
-                $transport = $this->transportBuilder->getTransport();
+                // Build and send after all config and attachments are set
+                $transport = $transportBuilder->getTransport();
                 $transport->sendMessage();
                 $this->logger->debug('BlueFormBuilder EmailNotification: Email sent successfully');
             } catch (LocalizedException $e) {
