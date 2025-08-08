@@ -243,7 +243,7 @@ class EmailNotification extends DataObject
         $form    = $this->getForm();
         $subject = $this->getEmailSubject($form->getCustomerEmailSubject());
         $header  = $this->getEmailHtml($form->getCustomerEmailHeader());
-        $footer  = $this->getEmailHtml($form->getCustomerFooterHeader());
+        $footer  = $this->getEmailHtml($form->getCustomerEmailFooter());
         $body    = $header . $this->getEmailBody($form->getCustomerEmailBody()) . $footer;
         $emails  = $this->getCustomerRecipientEmails();
         if ($emails) {

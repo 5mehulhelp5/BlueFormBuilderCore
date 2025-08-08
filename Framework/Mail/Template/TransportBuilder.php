@@ -105,6 +105,12 @@ class TransportBuilder
     private $messageFactory;
 
     /**
+     * When true, use the body/subject set directly instead of processing a template.
+     * @var bool
+     */
+    private $useDirectContent = false;
+
+    /**
      * @param FactoryInterface $templateFactory
      * @param MessageInterface $message
      * @param SenderResolverInterface $senderResolver
@@ -272,10 +278,12 @@ class TransportBuilder
      */
     public function getTransport()
     {
-        $this->prepareMessage();
+        // Only prepare from template if no direct content was set
+        if (!$this->useDirectContent) {
+            $this->prepareMessage();
+        }
         $mailTransport = $this->mailTransportFactory->create(['message' => clone $this->message]);
         $this->reset();
-
         return $mailTransport;
     }
 
@@ -290,6 +298,7 @@ class TransportBuilder
         $this->templateIdentifier = null;
         $this->templateVars = null;
         $this->templateOptions = null;
+        $this->useDirectContent = false;
         return $this;
     }
 
@@ -341,6 +350,7 @@ class TransportBuilder
      */
     public function setEmailSubject($subject)
     {
+        $this->useDirectContent = true;
         $this->message->setSubject($subject);
         return $this;
     }
@@ -353,6 +363,7 @@ class TransportBuilder
      */
     public function setEmailBody($body)
     {
+        $this->useDirectContent = true;
         $this->message->setBodyHtml($body);
         return $this;
     }
