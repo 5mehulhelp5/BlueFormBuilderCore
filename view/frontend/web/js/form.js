@@ -122,13 +122,12 @@ define([
                 if (firstActive.length && firstActive.is(':hidden')) {
                     var parents = firstActive.parents('.mgz-tabs-tab-content');
                     var status;
-                    parents.each(function () {
-                        // revert: original behavior without extra hidden check
-                        if (!$(this).hasClass('mgz-active') && !status) {
-                          status = true;
-                          var id = $(this).attr('id');
-                          if (id) $('a[href="#' + id + '"]').trigger('click');
-                          validator.element(firstActive);
+                    parents.each(function(index, el) {
+                        if (!$(this).hasClass('mgz-active') && !status && !$(this).hasClass('.bfb-state-hidden')) {
+                            status = true;
+                            var id = $(this).attr('id');
+                            if (id) $('a[href="#' + id + '"]').trigger('click');
+                            validator.element(firstActive)
                         }
                     });
                 }
@@ -137,34 +136,35 @@ define([
 
         initListeners: function () {
             var self = this;
-            this.element.find('.bfb-pages .mgz-tabs-tab-title a').each(function () {
-                $(this).on('click', function () {
-                    // revert: remove href guard
-                    $($(this).attr('href')).removeClass('bfb-animated');
-                });
+            this.element.find('.bfb-pages .mgz-tabs-tab-title a').each(function(index, el) {
+                $(this).on('click', function (e) {
+                    var _id = $(this).attr('href');
+                    $(_id).removeClass('bfb-animated');
+                })
             });
 
-            this.element.find('.action-next').each(function () {
-                $(this).on('click', function () {
+            this.element.find('.action-next').each(function(index, el) {
+                $(this).on('click', function (e) {
                     var currentPage = $(this).closest('.bfb-pages');
                     if ((self.options.validCurrentPage && self.validPage(currentPage.find('.mgz-tabs-tab-content')))
                         || !self.options.validCurrentPage
-                    ) {
+                        ) {
                         var anchors = currentPage.find('.mgz-tabs-nav').children();
-                        var status  = false;
-                        var nextAnchor;
-                        anchors.each(function () {
-                            // revert: original hasClass usage
-                            if (status && !$(this).hasClass('.bfb-state-hidden') && !nextAnchor) {
-                              nextAnchor = $(this);
-                              return true;
-                            }
-                            if ($(this).hasClass('mgz-active')) status = true;
-                        });
-                        if (nextAnchor) nextAnchor.trigger('click');
-                        self.updatePagesIndicator();
-                    }
-                });
+                    var status  = false;
+                    var nextAnchor;
+                    anchors.each(function(index, el) {
+                        if (status  && !$(this).hasClass('.bfb-state-hidden') && !nextAnchor) {
+                            nextAnchor = $(this);
+                            return true;
+                        }
+                        if ($(this).hasClass('mgz-active')) {
+                            status = true;
+                        }
+                    });
+                    if (nextAnchor) nextAnchor.trigger('click');
+                    self.updatePagesIndicator();
+                }
+            });
             });
 
             this.element.find('.action-prev').each(function(index, el) {
@@ -693,9 +693,6 @@ define([
                             grecaptcha.reset();
                         }
                     }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    self.element.parent().removeClass('bfb-loading');
                 }
             });
         },

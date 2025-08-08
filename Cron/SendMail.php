@@ -53,8 +53,7 @@ class SendMail
                 $emailNotification->setSubmission($submission)->sendAdminNotification();
                 $emailNotification->updateSubmission();
             }
-            // FIX: correct field name saved on submission is "customer_notification"
-            if ($submission->getCustomerNotification() && !$submission->getCustomerSendCount()) {
+            if ($submission->getEnableCustomerNotification() && !$submission->getCustomerSendCount()) {
                 $emailNotification = $this->emailNotificationFactory->create();
                 $emailNotification->setSubmission($submission)->sendCustomerNotification();
                 $emailNotification->updateSubmission();

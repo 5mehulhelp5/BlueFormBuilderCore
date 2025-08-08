@@ -1,79 +1,79 @@
 /*
  * JavaScript Load Image Fetch
  * https://github.com/blueimp/JavaScript-Load-Image
+ *
+ * Copyright 2017, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
  */
 
-/* global define, module, require */
+/* global define, module, require, Promise */
 
 (function (factory) {
   "use strict";
   if (typeof define === "function" && define.amd) {
+    // Register as an anonymous AMD module:
     define([
-      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image"
+      "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image",
     ], factory);
   } else if (typeof module === "object" && module.exports) {
-    module.exports = factory(
+    factory(
       require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image")
     );
   } else {
+    // Browser globals:
     factory(window.loadImage);
   }
 })(function (loadImage) {
   "use strict";
 
-  var g = (typeof window !== "undefined" ? window : (typeof self !== "undefined" ? self : this));
+  var global = loadImage.global;
 
   if (
-    g && g.fetch && g.Request && g.Response &&
-    g.Response.prototype && typeof g.Response.prototype.blob === "function"
+    global.fetch &&
+    global.Request &&
+    global.Response &&
+    global.Response.prototype.blob
   ) {
     loadImage.fetchBlob = function (url, callback, options) {
-      options = options || {};
-      var req = new g.Request(url, options);
-
-      var p = g.fetch(req).then(function (resp) {
-        if (!resp || !resp.ok) throw new Error("fetch failed: " + (resp && resp.status));
-        return resp.blob();
-      });
-
-      if (typeof callback === "function") {
-        p.then(function (blob) { callback(blob); }, function (err) { callback(err); });
-        return;
-      }
-      return p;
-    };
-  }
-
-  return loadImage;
-});
-        }
+      /**
+       * Fetch response handler.
+       *
+       * @param {Response} response Fetch response
+       * @returns {Blob} Fetched Blob.
+       */
+      function responseHandler(response) {
         return response.blob();
       }
-
-      var promise = global.fetch(req).then(toBlob);
-
-      // Promise API if no callback supplied
       if (global.Promise && typeof callback !== "function") {
-        return promise;
+        return fetch(new Request(url, callback)).then(responseHandler);
       }
-
-      // Callback API
-      promise
-        .then(function (blob) {
-          try {
-            callback && callback(blob);
-          } catch (e) {}
-        })
-        .catch(function (err) {
-          try {
-            callback && callback(err);
-          } catch (e) {}
+      fetch(new Request(url, options))
+        .then(responseHandler)
+        .then(callback)
+        [
+          // Avoid parsing error in IE<9, where catch is a reserved word.
+          // eslint-disable-next-line dot-notation
+          "catch"
+        ](function (err) {
+          callback(null, err);
         });
     };
-  }
-
-  return loadImage;
-});
+  } else if (
+    global.XMLHttpRequest &&
+    // https://xhr.spec.whatwg.org/#the-responsetype-attribute
+    new XMLHttpRequest().responseType === ""
+  ) {
+    loadImage.fetchBlob = function (url, callback, options) {
+      /**
+       * Promise executor
+       *
+       * @param {Function} resolve Resolution function
+       * @param {Function} reject Rejection function
+       */
+      function executor(resolve, reject) {
         options = options || {}; // eslint-disable-line no-param-reassign
         var req = new XMLHttpRequest();
         req.open(options.method || "GET", url);

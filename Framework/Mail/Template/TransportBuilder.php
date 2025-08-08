@@ -105,12 +105,6 @@ class TransportBuilder
     private $messageFactory;
 
     /**
-     * When true, use the body/subject set directly instead of processing a template.
-     * @var bool
-     */
-    private $useDirectContent = false;
-
-    /**
      * @param FactoryInterface $templateFactory
      * @param MessageInterface $message
      * @param SenderResolverInterface $senderResolver
@@ -278,12 +272,10 @@ class TransportBuilder
      */
     public function getTransport()
     {
-        // Only prepare from template if no direct content was set
-        if (!$this->useDirectContent) {
-            $this->prepareMessage();
-        }
+        $this->prepareMessage();
         $mailTransport = $this->mailTransportFactory->create(['message' => clone $this->message]);
         $this->reset();
+
         return $mailTransport;
     }
 
@@ -298,7 +290,6 @@ class TransportBuilder
         $this->templateIdentifier = null;
         $this->templateVars = null;
         $this->templateOptions = null;
-        $this->useDirectContent = false;
         return $this;
     }
 
@@ -350,7 +341,6 @@ class TransportBuilder
      */
     public function setEmailSubject($subject)
     {
-        $this->useDirectContent = true;
         $this->message->setSubject($subject);
         return $this;
     }
@@ -363,7 +353,6 @@ class TransportBuilder
      */
     public function setEmailBody($body)
     {
-        $this->useDirectContent = true;
         $this->message->setBodyHtml($body);
         return $this;
     }
@@ -371,18 +360,18 @@ class TransportBuilder
     /**
      * Add attachment to email
      *
-     * @param string $content   Raw file content
-     * @param string $fileName  Attachment filename
-     * @param string $mimeType  Attachment mime type
+     * @param string $fileName
+     * @param string $content
+     * @param string $mimeType
      * @return $this
      */
-    public function addAttachment($content, $fileName, $mimeType)
+    public function addAttachment($fileName, $content, $mimeType)
     {
         $this->message->createAttachment(
             $content,
             $mimeType,
-            \Laminas\Mime\Mime::DISPOSITION_ATTACHMENT,
-            \Laminas\Mime\Mime::ENCODING_BASE64,
+            \Zend_Mime::DISPOSITION_ATTACHMENT,
+            \Zend_Mime::ENCODING_BASE64,
             $fileName
         );
         return $this;

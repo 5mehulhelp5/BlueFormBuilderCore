@@ -63,12 +63,14 @@ class Submission extends AbstractDb
         EntityManager $entityManager,
         MetadataPool $metadataPool,
         \Cytracon\BlueFormBuilderCore\Model\ResourceModel\File\CollectionFactory $fileCollectionFactory,
+        \Cytracon\BlueFormBuilderCore\Model\FormFactory $formFactory,
         $connectionName = null
     ) {
-        $this->entityManager = $entityManager;
-        $this->metadataPool = $metadataPool;
-        $this->_fileCollectionFactory = $fileCollectionFactory;
         parent::__construct($context, $connectionName);
+        $this->entityManager          = $entityManager;
+        $this->metadataPool           = $metadataPool;
+        $this->_fileCollectionFactory = $fileCollectionFactory;
+        $this->formFactory            = $formFactory;
     }
 
     /**
@@ -79,16 +81,6 @@ class Submission extends AbstractDb
     protected function _construct()
     {
         $this->_init('mgz_blueformbuilder_submission', 'submission_id');
-    }
-
-    /**
-     * Use metadata pool connection
-     *
-     * @return \Magento\Framework\DB\Adapter\AdapterInterface
-     */
-    public function getConnection()
-    {
-        return $this->metadataPool->getMetadata(SubmissionInterface::class)->getEntityConnection();
     }
 
     /**
@@ -144,10 +136,11 @@ class Submission extends AbstractDb
         if ($field != $entityMetadata->getIdentifierField()) {
             $select = $this->_getLoadSelect($field, $value, $object);
             $select->reset(Select::COLUMNS)
-                ->columns($this->getMainTable() . '.' . $entityMetadata->getIdentifierField())
-                ->limit(1);
+            ->columns($this->getMainTable() . '.' . $entityMetadata->getIdentifierField())
+            ->limit(1);
             $result = $this->getConnection()->fetchCol($select);
-            $submissionId = count($result) ? (int)$result[0] : $value;
+            $value  = count($result) ? $result[0] : $value;
+            $submissionId = count($result);
         }
         return $submissionId;
     }
