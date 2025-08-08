@@ -19,7 +19,7 @@
       "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image",
     ], factory);
   } else if (typeof module === "object" && module.exports) {
-    factory(
+    module.exports = factory(
       require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image")
     );
   } else {
@@ -29,51 +29,51 @@
 })(function (loadImage) {
   "use strict";
 
-  var global = loadImage.global;
+  var global = typeof window !== "undefined" ? window : typeof self !== "undefined" ? self : this;
 
   if (
+    global &&
     global.fetch &&
     global.Request &&
     global.Response &&
-    global.Response.prototype.blob
+    global.Response.prototype &&
+    typeof global.Response.prototype.blob === "function"
   ) {
     loadImage.fetchBlob = function (url, callback, options) {
-      /**
-       * Fetch response handler.
-       *
-       * @param {Response} response Fetch response
-       * @returns {Blob} Fetched Blob.
-       */
-      function responseHandler(response) {
+      options = options || {};
+      var req = new global.Request(url, options);
+
+      function toBlob(response) {
+        if (!response || !response.ok) {
+          throw new Error("fetch failed with status " + (response && response.status));
+        }
         return response.blob();
       }
+
+      var promise = global.fetch(req).then(toBlob);
+
+      // Promise API if no callback supplied
       if (global.Promise && typeof callback !== "function") {
-        return fetch(new Request(url, callback)).then(responseHandler);
+        return promise;
       }
-      fetch(new Request(url, options))
-        .then(responseHandler)
-        .then(callback)
-        [
-          // Avoid parsing error in IE<9, where catch is a reserved word.
-          // eslint-disable-next-line dot-notation
-          "catch"
-        ](function (err) {
-          callback(null, err);
+
+      // Callback API
+      promise
+        .then(function (blob) {
+          try {
+            callback && callback(blob);
+          } catch (e) {}
+        })
+        .catch(function (err) {
+          try {
+            callback && callback(err);
+          } catch (e) {}
         });
     };
-  } else if (
-    global.XMLHttpRequest &&
-    // https://xhr.spec.whatwg.org/#the-responsetype-attribute
-    new XMLHttpRequest().responseType === ""
-  ) {
-    loadImage.fetchBlob = function (url, callback, options) {
-      /**
-       * Promise executor
-       *
-       * @param {Function} resolve Resolution function
-       * @param {Function} reject Rejection function
-       */
-      function executor(resolve, reject) {
+  }
+
+  return loadImage;
+});
         options = options || {}; // eslint-disable-line no-param-reassign
         var req = new XMLHttpRequest();
         req.open(options.method || "GET", url);

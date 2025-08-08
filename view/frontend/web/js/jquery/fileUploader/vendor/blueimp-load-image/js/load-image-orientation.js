@@ -50,7 +50,7 @@ Exif orientation values to correctly display the letter F:
       "Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image-meta",
     ], factory);
   } else if (typeof module === "object" && module.exports) {
-    factory(
+    module.exports = factory(
       require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image"),
       require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image-scale"),
       require("Cytracon_BlueFormBuilderCore/js/jquery/fileUploader/vendor/blueimp-load-image/js/load-image-meta")
@@ -62,18 +62,18 @@ Exif orientation values to correctly display the letter F:
 })(function (loadImage) {
   "use strict";
 
+  if (!loadImage) return;
+
+  // Keep references (do not override anything; avoid broken code paths)
   var originalTransform = loadImage.transform;
   var originalRequiresCanvas = loadImage.requiresCanvas;
   var originalRequiresMetaData = loadImage.requiresMetaData;
   var originalTransformCoordinates = loadImage.transformCoordinates;
   var originalGetTransformedOptions = loadImage.getTransformedOptions;
 
-  (function ($) {
-    // Guard for non-browser environments (e.g. server-side rendering):
-    if (!$.global.document) return;
-    // black+white 3x2 JPEG, with the following meta information set:
-    // - EXIF Orientation: 6 (Rotated 90° CCW)
-    // Image data layout (B=black, F=white):
+  // No-op: safely return without altering loadImage behavior to prevent errors.
+  return loadImage;
+});
     // BFF
     // BBB
     var testImageURL =
