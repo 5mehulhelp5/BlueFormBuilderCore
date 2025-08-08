@@ -20,11 +20,6 @@ class TransportBuilder extends \Cytracon\BlueFormBuilderCore\Framework\Mail\Temp
     protected $_subject;
     protected $_parts = [];
 
-    /**
-     * @var \Magento\Framework\Mail\Message
-     */
-    protected $message;
-
     public function setEmailBody($body)
     {
         $this->_body = $body;
@@ -81,8 +76,8 @@ class TransportBuilder extends \Cytracon\BlueFormBuilderCore\Framework\Mail\Temp
         $this->createAttachment(
             $fileContent,
             $mineType,
-            \Magento\Framework\HTTP\Mime::DISPOSITION_ATTACHMENT,
-            \Magento\Framework\HTTP\Mime::ENCODING_BASE64,
+            \Laminas\Mime\Mime::DISPOSITION_ATTACHMENT,
+            \Laminas\Mime\Mime::ENCODING_BASE64,
             $fileName
         );
 
@@ -91,9 +86,9 @@ class TransportBuilder extends \Cytracon\BlueFormBuilderCore\Framework\Mail\Temp
 
     public function createAttachment(
         $body,
-        $mimeType    = \Magento\Framework\HTTP\Mime::TYPE_OCTETSTREAM,
-        $disposition = \Magento\Framework\HTTP\Mime::DISPOSITION_ATTACHMENT,
-        $encoding    = \Magento\Framework\HTTP\Mime::ENCODING_BASE64,
+        $mimeType    = \Laminas\Mime\Mime::TYPE_OCTETSTREAM,
+        $disposition = \Laminas\Mime\Mime::DISPOSITION_ATTACHMENT,
+        $encoding    = \Laminas\Mime\Mime::ENCODING_BASE64,
         $filename    = null
     ) {
         $mp = new \Laminas\Mime\Part($body);
@@ -124,6 +119,11 @@ class TransportBuilder extends \Cytracon\BlueFormBuilderCore\Framework\Mail\Temp
         $this->_parts[] = $part;
     }
 
+    public function getParts()
+    {
+        return $this->_parts;
+    }
+}
     public function getParts()
     {
         return $this->_parts;
