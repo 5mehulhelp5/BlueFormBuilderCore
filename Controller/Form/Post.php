@@ -338,6 +338,24 @@ class Post extends \Magento\Framework\App\Action\Action
                 $result['status']  = true;
                 $result['key']     = $submission->getSubmissionHash();
 
+                // Include debug info only if requested
+                if ($this->getRequest()->getParam('bfb_debug')) {
+                    $result['debug'] = [
+                        'submission_id'          => (int)$submission->getId(),
+                        'submission_hash'        => (string)$submission->getSubmissionHash(),
+                        'admin_notification'     => (bool)$form->getEnableNotification(),
+                        'customer_notification'  => (bool)$form->getEnableCustomerNotification(),
+                        'sender_name'            => (string)$this->processVariables($form->getSenderName()),
+                        'sender_email'           => (string)$this->processVariables($form->getSenderEmail()),
+                        'reply_to'               => (string)$this->processVariables($form->getReplyTo()),
+                        'recipients'             => (string)$this->processVariables($form->getRecipients()),
+                        'recipients_bcc'         => (string)$this->processVariables($form->getRecipientsBcc()),
+                        'attachments_count'      => (int)count($this->getAttachments()),
+                        'redirect_to'            => $redirectTo ?: null,
+                        'is_ajax'                => (bool)$this->getRequest()->isAjax()
+                    ];
+                }
+
                 $this->formProcessor->deleteFormProcess($form->getId());
 
                 $this->_eventManager->dispatch(

@@ -194,7 +194,17 @@ $publicKey = $helper->getConfig('recaptcha3/public_key');
                                 console.log('BFB: XHR FormData', safeEntriesFromFormData(body));
                             }
                             this.addEventListener('load', function () {
-                                console.log('BFB: XHR load', { url: this.responseURL || i.url, status: this.status });
+                                var txt = '';
+                                try { txt = String(this.responseText || ''); } catch (e) {}
+                                var preview = txt.length > 2000 ? (txt.slice(0, 2000) + '…') : txt;
+                                var json;
+                                try { json = JSON.parse(txt); } catch (e) { json = null; }
+                                console.log('BFB: XHR load', {
+                                    url: this.responseURL || i.url,
+                                    status: this.status,
+                                    bodyPreview: preview,
+                                    json: json
+                                });
                             });
                             this.addEventListener('error', function () {
                                 console.error('BFB: XHR error', i);

@@ -642,6 +642,13 @@ define([
                 }
             });
 
+            // Add debug flag if enabled
+            try {
+                if (window.localStorage && localStorage.getItem('bfbDebug') === '1') {
+                    submitData += (submitData ? '&' : '') + 'bfb_debug=1';
+                }
+            } catch (e) {}
+
             $.ajax({
                 url: form.attr('action'),
                 data: submitData,
@@ -655,6 +662,8 @@ define([
                     }
                 },
                 success: function(res) {
+                    // Debug log
+                    try { console.log('BFB: ajax success', res); } catch(e){}
                     self.element.parent().removeClass('bfb-loading');
                     $(form).trigger('bfbAfterSubmit', res);
 
@@ -693,6 +702,12 @@ define([
                             grecaptcha.reset();
                         }
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    try {
+                        console.error('BFB: ajax error', { status: jqXHR.status, textStatus: textStatus, error: errorThrown, body: jqXHR && jqXHR.responseText });
+                    } catch(e){}
+                    self.element.parent().removeClass('bfb-loading');
                 }
             });
         },
