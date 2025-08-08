@@ -360,12 +360,12 @@ class TransportBuilder
     /**
      * Add attachment to email
      *
-     * @param string $fileName
-     * @param string $content
-     * @param string $mimeType
+     * @param string $content   Raw file content
+     * @param string $fileName  Attachment filename
+     * @param string $mimeType  Attachment mime type
      * @return $this
      */
-    public function addAttachment($fileName, $content, $mimeType)
+    public function addAttachment($content, $fileName, $mimeType)
     {
         $this->message->createAttachment(
             $content,
