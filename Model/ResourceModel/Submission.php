@@ -9,18 +9,14 @@
  *
  * @category  BlueFormBuilder
  * @package   Cytracon_BlueFormBuilderCore
- * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 
 namespace Cytracon\BlueFormBuilderCore\Model\ResourceModel;
 
-use Magento\Framework\DB\Select;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\EntityManager\MetadataPool;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\ResourceModel\Db\Context;
 use Magento\Framework\EntityManager\EntityManager;
+use Magento\Framework\EntityManager\MetadataPool;
 use Cytracon\BlueFormBuilderCore\Api\Data\SubmissionInterface;
 
 class Submission extends AbstractDb
@@ -36,44 +32,48 @@ class Submission extends AbstractDb
     protected $metadataPool;
 
     /**
-     * @var \Cytracon\BlueFormBuilderCore\Model\ResourceModel\File\CollectionFactory
+     * @var \Cytracon\BlueFormBuilderCore\Model\ResourceModel\File\CollectionFactory|null
      */
     protected $_fileCollectionFactory;
 
     /**
-     * @var \Cytracon\BlueFormBuilderCore\Model\Form
-     */
-    protected $_form;
-
-    /**
-     * @var \Cytracon\BlueFormBuilderCore\Model\FormFactory
-     */
-    protected $formFactory;
-
-    /**
-     * @param Context                                                          $context
-     * @param EntityManager                                                    $entityManager
-     * @param MetadataPool                                                     $metadataPool
-     * @param \Cytracon\BlueFormBuilderCore\Model\ResourceModel\File\CollectionFactory $fileCollectionFactory
-     * @param \Cytracon\BlueFormBuilderCore\Model\FormFactory                          $formFactory
-     * @param string                                                           $connectionName
+     * @param Context $context
+     * @param EntityManager $entityManager
+     * @param MetadataPool $metadataPool
+     * @param \Cytracon\BlueFormBuilderCore\Model\ResourceModel\File\CollectionFactory|null $fileCollectionFactory
+     * @param string|null $connectionName
      */
     public function __construct(
         Context $context,
         EntityManager $entityManager,
         MetadataPool $metadataPool,
-        \Cytracon\BlueFormBuilderCore\Model\ResourceModel\File\CollectionFactory $fileCollectionFactory,
-        \Cytracon\BlueFormBuilderCore\Model\FormFactory $formFactory,
+        \Cytracon\BlueFormBuilderCore\Model\ResourceModel\File\CollectionFactory $fileCollectionFactory = null,
         $connectionName = null
     ) {
-        parent::__construct($context, $connectionName);
-        $this->entityManager          = $entityManager;
-        $this->metadataPool           = $metadataPool;
+        $this->entityManager = $entityManager;
+        $this->metadataPool = $metadataPool;
         $this->_fileCollectionFactory = $fileCollectionFactory;
-        $this->formFactory            = $formFactory;
+        parent::__construct($context, $connectionName);
     }
 
     /**
+     * Initialize resource model
+     */
+    protected function _construct()
+    {
+        $this->_init('mgz_blueformbuilder_submission', 'submission_id');
+    }
+
+    /**
+     * Use metadata pool connection
+     *
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface
+     */
+    public function getConnection()
+    {
+        return $this->metadataPool->getMetadata(SubmissionInterface::class)->getEntityConnection();
+    }
+}
      * Initialize resource model
      *
      * @return void
