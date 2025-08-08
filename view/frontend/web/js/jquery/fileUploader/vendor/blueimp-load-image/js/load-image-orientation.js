@@ -62,9 +62,6 @@ Exif orientation values to correctly display the letter F:
 })(function (loadImage) {
   "use strict";
 
-  // No-op orientation plugin to avoid errors from broken implementations.
-  return loadImage;
-});
   var originalTransform = loadImage.transform;
   var originalRequiresCanvas = loadImage.requiresCanvas;
   var originalRequiresMetaData = loadImage.requiresMetaData;
@@ -480,6 +477,9 @@ Exif orientation values to correctly display the letter F:
         ctx.rotate(-0.5 * Math.PI);
         ctx.translate(-width, 0);
         break;
+    }
+  };
+});
     }
   };
 });

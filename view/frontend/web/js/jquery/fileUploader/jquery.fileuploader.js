@@ -28,6 +28,6 @@
 })(function ($) {
   "use strict";
   // ...existing code...
-  // This wrapper exists to ensure dependencies are loaded; no extra logic required here.
+});
 });
 })();

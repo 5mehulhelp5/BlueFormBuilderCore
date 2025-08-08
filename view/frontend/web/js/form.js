@@ -122,13 +122,13 @@ define([
                 if (firstActive.length && firstActive.is(':hidden')) {
                     var parents = firstActive.parents('.mgz-tabs-tab-content');
                     var status;
-                    parents.each(function(index, el) {
-                        // FIX: remove leading dot in hasClass
-                        if (!$(this).hasClass('mgz-active') && !status && !$(this).hasClass('bfb-state-hidden')) {
-                            status = true;
-                            var id = $(this).attr('id');
-                            if (id) $('a[href="#' + id + '"]').trigger('click');
-                            validator.element(firstActive)
+                    parents.each(function () {
+                        // revert: original behavior without extra hidden check
+                        if (!$(this).hasClass('mgz-active') && !status) {
+                          status = true;
+                          var id = $(this).attr('id');
+                          if (id) $('a[href="#' + id + '"]').trigger('click');
+                          validator.element(firstActive);
                         }
                     });
                 }
@@ -137,20 +137,15 @@ define([
 
         initListeners: function () {
             var self = this;
-            this.element.find('.bfb-pages .mgz-tabs-tab-title a').each(function(index, el) {
-                $(this).on('click', function (e) {
-                    // FIX: guard invalid selector when href is "#" or empty
-                    var href = $(this).attr('href') || '';
-                    if (href === '#' || href.trim() === '') {
-                        e.preventDefault();
-                        return;
-                    }
-                    $(href).removeClass('bfb-animated');
-                })
+            this.element.find('.bfb-pages .mgz-tabs-tab-title a').each(function () {
+                $(this).on('click', function () {
+                    // revert: remove href guard
+                    $($(this).attr('href')).removeClass('bfb-animated');
+                });
             });
 
-            this.element.find('.action-next').each(function(index, el) {
-                $(this).on('click', function (e) {
+            this.element.find('.action-next').each(function () {
+                $(this).on('click', function () {
                     var currentPage = $(this).closest('.bfb-pages');
                     if ((self.options.validCurrentPage && self.validPage(currentPage.find('.mgz-tabs-tab-content')))
                         || !self.options.validCurrentPage
@@ -158,15 +153,13 @@ define([
                         var anchors = currentPage.find('.mgz-tabs-nav').children();
                         var status  = false;
                         var nextAnchor;
-                        anchors.each(function(index, el) {
-                            // FIX: remove leading dot in hasClass
-                            if (status && !$(this).hasClass('bfb-state-hidden') && !nextAnchor) {
-                                nextAnchor = $(this);
-                                return true;
+                        anchors.each(function () {
+                            // revert: original hasClass usage
+                            if (status && !$(this).hasClass('.bfb-state-hidden') && !nextAnchor) {
+                              nextAnchor = $(this);
+                              return true;
                             }
-                            if ($(this).hasClass('mgz-active')) {
-                                status = true;
-                            }
+                            if ($(this).hasClass('mgz-active')) status = true;
                         });
                         if (nextAnchor) nextAnchor.trigger('click');
                         self.updatePagesIndicator();
@@ -649,13 +642,6 @@ define([
                 }
             });
 
-            // Add debug flag if enabled
-            try {
-                if (window.localStorage && localStorage.getItem('bfbDebug') === '1') {
-                    submitData += (submitData ? '&' : '') + 'bfb_debug=1';
-                }
-            } catch (e) {}
-
             $.ajax({
                 url: form.attr('action'),
                 data: submitData,
@@ -669,8 +655,6 @@ define([
                     }
                 },
                 success: function(res) {
-                    // Debug log
-                    try { console.log('BFB: ajax success', res); } catch(e){}
                     self.element.parent().removeClass('bfb-loading');
                     $(form).trigger('bfbAfterSubmit', res);
 
@@ -711,9 +695,6 @@ define([
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    try {
-                        console.error('BFB: ajax error', { status: jqXHR.status, textStatus: textStatus, error: errorThrown, body: jqXHR && jqXHR.responseText });
-                    } catch(e){}
                     self.element.parent().removeClass('bfb-loading');
                 }
             });
