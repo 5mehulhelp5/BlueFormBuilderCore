@@ -252,12 +252,14 @@ class Post extends \Magento\Framework\App\Action\Action
 
         try {
             $form = $this->_initForm();
+            $this->logger->debug('BFB Post: init form', ['form_id' => $form->getId(), 'form_key' => $formKey]);
 
             $post = $this->getFormPost();
 
             if ($post && $formKey) {
 
                 $this->_resource->getConnection()->beginTransaction();
+                $this->logger->debug('BFB Post: transaction started');
 
                 $this->_eventManager->dispatch(
                     'bfb_submission_post_save_before',
@@ -269,16 +271,19 @@ class Post extends \Magento\Framework\App\Action\Action
                 $this->verifyReCaptcha();
 
                 if ($this->hasSubmitted()) {
+                    $this->logger->warning('BFB Post: blocked by disable_multiple');
                     $result['message'] = $form->getDisableMultipleMessage();
                     $result['type']    = 'alert';
                     if ($this->getRequest()->isAjax()) {
                         $this->_resource->getConnection()->rollBack();
+                        $this->logger->debug('BFB Post: rolled back (ajax)');
                         $this->getResponse()->representJson(
                             $this->_objectManager->get(\Magento\Framework\Json\Helper\Data::class)->jsonEncode($result)
                         );
                         return;
                     } else {
                         $this->_resource->getConnection()->rollBack();
+                        $this->logger->debug('BFB Post: rolled back (redirect)');
                         $this->messageManager->addError($result['message']);
                         $redirectTo = $this->_redirect->getRefererUrl();
                         $resultRedirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
@@ -315,6 +320,7 @@ class Post extends \Magento\Framework\App\Action\Action
 
                 // Save
                 $submission = $this->saveSubmission();
+                $this->logger->debug('BFB Post: submission saved', ['submission_id' => $submission->getId()]);
 
                 // After Save
                 foreach ($this->getElements() as $element) {
@@ -346,9 +352,11 @@ class Post extends \Magento\Framework\App\Action\Action
                 );
 
                 $this->_resource->getConnection()->commit();
+                $this->logger->debug('BFB Post: commit complete', ['submission_hash' => $result['key']]);
             }
         }  catch (LocalizedException $e) {
             $this->_resource->getConnection()->rollBack();
+            $this->logger->error('BFB Post: LocalizedException', ['error' => $e->getMessage()]);
             $this->messageManager->addErrorMessage($e->getMessage());
         } catch (\Exception $e) {
             $this->_resource->getConnection()->rollBack();
