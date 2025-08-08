@@ -370,8 +370,8 @@ class TransportBuilder
         $this->message->createAttachment(
             $content,
             $mimeType,
-            \Zend_Mime::DISPOSITION_ATTACHMENT,
-            \Zend_Mime::ENCODING_BASE64,
+            \Laminas\Mime\Mime::DISPOSITION_ATTACHMENT,
+            \Laminas\Mime\Mime::ENCODING_BASE64,
             $fileName
         );
         return $this;

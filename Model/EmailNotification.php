@@ -19,6 +19,7 @@ use Magento\Framework\DataObject;
 use Magento\Customer\Helper\View as CustomerViewHelper;
 use Cytracon\BlueFormBuilderCore\Model\File as FileModel;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Cytracon\BlueFormBuilderCore\Mail\Template\TransportBuilder as BfbTransportBuilder;
 
 class EmailNotification extends DataObject
 {
@@ -133,7 +134,7 @@ class EmailNotification extends DataObject
      * @param \Magento\Customer\Model\CustomerRegistry $customerRegistry
      * @param \Magento\Framework\Filesystem\Io\File $file
      * @param \Cytracon\Core\Helper\Data $coreHelper
-     * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
+     * @param BfbTransportBuilder $transportBuilder
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
@@ -149,7 +150,7 @@ class EmailNotification extends DataObject
         \Magento\Customer\Model\CustomerRegistry $customerRegistry,
         \Magento\Framework\Filesystem\Io\File $file,
         \Cytracon\Core\Helper\Data $coreHelper,
-        \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder,
+        BfbTransportBuilder $transportBuilder,
         \Psr\Log\LoggerInterface $logger
     ) {
         $this->inlineTranslation = $inlineTranslation;
@@ -372,22 +373,15 @@ class EmailNotification extends DataObject
             try {
                 $submission = $this->getSubmission();
                 $transportBuilder = $this->transportBuilder;
+
+                // Set subject/body directly – avoids dependency on a specific template id
                 $transportBuilder
-                    ->setTemplateIdentifier('176') // keep existing identifier; ensure template exists
-                    ->setTemplateOptions([
-                        'area'  => \Magento\Framework\App\Area::AREA_FRONTEND,
-                        'store' => $submission->getStoreId()
-                    ])
-                    ->setTemplateVars([
-                        'email_body' => $body,
-                        'subject'    => $subject,
-                        'submission' => $submission,
-                        'form'       => $this->getForm()
-                    ])
                     ->setFromByScope([
                         'name'  => $senderName,
                         'email' => $senderEmail
-                    ], $submission->getStoreId());
+                    ], $submission->getStoreId())
+                    ->setEmailSubject($subject)
+                    ->setEmailBody($body);
 
                 foreach ($recipientEmails as $email) {
                     $transportBuilder->addTo($email);
@@ -395,13 +389,9 @@ class EmailNotification extends DataObject
                 foreach ($recipientBccEmails as $bccEmail) {
                     $transportBuilder->addBcc($bccEmail);
                 }
-                if ($replyTo) {
-                    $transportBuilder->setReplyTo($replyTo);
-                } else {
-                    $transportBuilder->setReplyTo($senderEmail);
-                }
+                $transportBuilder->setReplyTo($replyTo ?: $senderEmail);
 
-                // Attach files via TransportBuilder (Laminas) instead of Symfony DataPart and before building transport
+                // Attach files (use correct parameter order for our TransportBuilder)
                 if ($attachments) {
                     $paths = [];
                     foreach ($attachments as $attachment) {
@@ -416,15 +406,15 @@ class EmailNotification extends DataObject
                                 'mime' => $mime
                             ]);
 
-                            // Magento core method to add attachment (uses Laminas\Mime\Part internally)
+                            // Our builder signature: addAttachment($fileName, $fileContent, $mimeType)
                             if (method_exists($transportBuilder, 'addAttachment')) {
-                                $transportBuilder->addAttachment($content, $fileName, $mime);
+                                $transportBuilder->addAttachment($fileName, $content, $mime);
                             }
 
                             $paths[] = $attachment['path'];
                         } else {
                             $this->logger->error('BlueFormBuilder EmailNotification: Attachment file missing', [
-                                'path' => $attachment['path']
+                                'path' => $attachment['path'] ?? null
                             ]);
                         }
                     }
@@ -435,7 +425,6 @@ class EmailNotification extends DataObject
                     ['submission' => $submission, 'type' => $type, 'obj' => $this, 'transport' => $transportBuilder]
                 );
 
-                // Build and send after all config and attachments are set
                 $transport = $transportBuilder->getTransport();
                 $transport->sendMessage();
                 $this->logger->debug('BlueFormBuilder EmailNotification: Email sent successfully');
@@ -445,9 +434,9 @@ class EmailNotification extends DataObject
             } catch (\Exception $e) {
                 $this->logger->error('BlueFormBuilder EmailNotification General Error: ' . $e->getMessage());
                 $this->messageManager->addErrorMessage(__('We can\'t send the email right now: %1', $e->getMessage()));
+            } finally {
+                $this->inlineTranslation->resume();
             }
-
-            $this->inlineTranslation->resume();
         } else {
             $this->logger->error('BlueFormBuilder EmailNotification: No sender email provided');
         }
