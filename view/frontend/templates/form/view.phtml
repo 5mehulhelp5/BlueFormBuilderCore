@@ -165,7 +165,16 @@ $publicKey = $helper->getConfig('recaptcha3/public_key');
                     } catch (e) {}
                     return _fetch.apply(this, arguments).then(function (resp) {
                         try {
-                            console.log('BFB: fetch response', { url: resp.url, status: resp.status });
+                            var rurl = resp && (resp.url || '');
+                            var isFormActionResp = rurl && String(rurl).indexOf(formEl.action) !== -1;
+                            if (isFormActionResp) {
+                                // Clone to avoid locking the body
+                                resp.clone().text().then(function (txt) {
+                                    var preview = txt.length > 2000 ? (txt.slice(0, 2000) + '…') : txt;
+                                    var json; try { json = JSON.parse(txt); } catch(_) { json = null; }
+                                    console.log('BFB: fetch response', { url: rurl, status: resp.status, bodyPreview: preview, json: json });
+                                });
+                            }
                         } catch (e) {}
                         return resp;
                     }).catch(function (err) {
