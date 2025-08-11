@@ -188,40 +188,9 @@
         public function setSubmission(\Cytracon\BlueFormBuilderCore\Model\Submission $submission)
         {
             $this->_submission = $submission;
-        // Assign the form if it is already present on the submission
-        $formFromSubmission = $submission->getForm();
-        // If the form property is missing, attempt to load it via the form_id field
-        if (!$formFromSubmission) {
-            // Try to get form_id directly from the data array
-            $formId = null;
-            if ($submission->getData('form_id')) {
-                $formId = $submission->getData('form_id');
-            } else {
-                // Fallback to magic getter getFormId(), even if it is provided via __call (method_exists may return false)
-                try {
-                    $formId = $submission->getFormId();
-                } catch (\Exception $e) {
-                    $formId = null;
-                }
-            }
-            if ($formId) {
-                try {
-                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                    /** @var \Cytracon\BlueFormBuilderCore\Model\Form $formModel */
-                    $formModel = $objectManager->create(\Cytracon\BlueFormBuilderCore\Model\Form::class);
-                    $loadedForm = $formModel->load($formId);
-                    // Only assign if the load was successful
-                    if ($loadedForm && $loadedForm->getId()) {
-                        $formFromSubmission = $loadedForm;
-                    }
-                } catch (\Exception $e) {
-                    $this->logger->error('BlueFormBuilder EmailNotification: Unable to load form for submission', ['form_id' => $formId, 'error' => $e->getMessage()]);
-                }
-            }
-        }
-        $this->_form       = $formFromSubmission;
-            $this->setVariables($submission->getVariables());
-            return $this;
+        $this->_form = $submission->getForm();
+        $this->setVariables($submission->getVariables());
+        return $this;
         }
 
         /**
@@ -263,11 +232,6 @@
         {
             $this->logger->debug('BlueFormBuilder EmailNotification: Starting sendEmail method');
         $form    = $this->getForm();
-        // If no form is set, we cannot proceed; log error and abort
-        if (!$form) {
-            $this->logger->error('BlueFormBuilder EmailNotification: No form set for sending email');
-            return;
-        }
         $success = true;
             try {
                 // send customer notification if enabled
@@ -301,11 +265,6 @@
         public function sendCustomerNotification()
         {
         $form    = $this->getForm();
-        // Safeguard: if no form is set, log and abort
-        if (!$form) {
-            $this->logger->error('BlueFormBuilder EmailNotification: Cannot send customer notification because no form is set');
-            return;
-        }
             $subject = $this->getEmailSubject($form->getCustomerEmailSubject());
             $header  = $this->getEmailHtml($form->getCustomerEmailHeader());
             $footer  = $this->getEmailHtml($form->getCustomerFooterHeader());
@@ -337,11 +296,6 @@
         public function sendAdminNotification()
         {
         $form       = $this->getForm();
-        // Safeguard: if form is null, log and abort to prevent null dereferencing
-        if (!$form) {
-            $this->logger->error('BlueFormBuilder EmailNotification: Cannot send admin notification because no form is set');
-            return;
-        }
         $submission = $this->getSubmission();
             $recipientEmails     = $this->getAdminRecipientEmails();
             $recipientsBcc       = explode(',', $form->getRecipientsBcc());
@@ -382,9 +336,6 @@
         private function getAdminRecipientEmails()
         {
         $form       = $this->getForm();
-        if (!$form) {
-            return [];
-        }
         $recipients = explode(',', $form->getRecipients());
             if ($adminAdditionEmails = $this->getAdminAdditionEmails()) {
                 $recipients = array_merge($recipients, $adminAdditionEmails);
