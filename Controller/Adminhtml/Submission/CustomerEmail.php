@@ -64,7 +64,7 @@ class CustomerEmail extends \Magento\Backend\App\Action
                 if ($id && !$model->getId()) {
                     throw new LocalizedException(__('This submission no longer exists.'));
                 }
-                $this->emailNotification->setForm($form)->setSubmission($model)->sendCustomerNotification();
+                $this->emailNotification->setSubmission($model)->sendCustomerNotification();
                 $this->messageManager->addSuccessMessage(__('You sent the email to admin.'));
                 return $resultRedirect->setPath('*/*/edit', ['submission_id' => $model->getId(), '_current' => true]);
             } catch (LocalizedException $e) {

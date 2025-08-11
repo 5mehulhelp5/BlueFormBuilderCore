@@ -36,11 +36,6 @@ class Success extends \Magento\Framework\App\Action\Action
 	 */
 	protected $submissionCollectionFactory;
 
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
-
 	/**
 	 * @param \Magento\Framework\App\Action\Context                                  $context                     
 	 * @param \Cytracon\Core\Helper\Data                                              $coreHelper                  
@@ -51,14 +46,12 @@ class Success extends \Magento\Framework\App\Action\Action
         \Magento\Framework\App\Action\Context $context,
         \Cytracon\Core\Helper\Data $coreHelper,
         \Cytracon\BlueFormBuilderCore\Model\EmailNotification $emailNotification,
-        \Cytracon\BlueFormBuilderCore\Model\ResourceModel\Submission\CollectionFactory $submissionCollectionFactory,
-        \Psr\Log\LoggerInterface $logger
+        \Cytracon\BlueFormBuilderCore\Model\ResourceModel\Submission\CollectionFactory $submissionCollectionFactory
     ) {
         parent::__construct($context);
 		$this->coreHelper                  = $coreHelper;
 		$this->emailNotification           = $emailNotification;
 		$this->submissionCollectionFactory = $submissionCollectionFactory;
-        $this->logger                      = $logger;
     }
 
     /**
@@ -66,26 +59,13 @@ class Success extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $this->logger->debug('BFB Success: entered', [
-            'params' => $this->getRequest()->getParams()
-        ]);
     	try {
 			$post = $this->getRequest()->getPostValue();
 			if (isset($post['key']) && $post['key']) {
-                $this->logger->debug('BFB Success: has key', ['key' => $post['key'], 'submission_id' => $post['submission_id'] ?? null]);
 				$collection = $this->submissionCollectionFactory->create();
 				$collection->addFieldToFilter('submission_hash', $post['key']);
 				$submission = $collection->getFirstItem();
-                $this->logger->debug('BFB Success: loaded submission', ['id' => $submission->getId()]);
-				if ($submission->getId()
-					&& (
-						!$submission->getIsActive()
-						|| !$submission->getSendCount()
-						|| !$submission->getCustomerSendCount()
-						|| $submission->getId() == ($post['submission_id'] ?? null)
-					)
-				) {
-
+				if ($submission->getId() && (!$submission->getIsActive() || $submission->getId()==$post['submission_id'])) {
 					$form = $submission->getForm();
 					// Before Save
 					$post = $this->coreHelper->unserialize($submission->getPost());
@@ -113,26 +93,16 @@ class Success extends \Magento\Framework\App\Action\Action
 	                    $element->success();
 	                }
 
-                    $this->logger->debug('BFB Success: sending email...');
                     $this->emailNotification->setAttachments(
                         $this->_attachments
                     )->setSubmission(
                         $submission
                     )->sendEmail();
-                    $this->logger->debug('BFB Success: email send invoked');
 
 		            return;
-				} else {
-                    $this->logger->warning('BFB Success: submission not eligible', [
-                        'id' => $submission->getId(),
-                        'is_active' => $submission->getIsActive()
-                    ]);
-                }
-			} else {
-                $this->logger->warning('BFB Success: missing key in request');
-            }
+				}
+			}
 		} catch (\Exception $e) {
-            $this->logger->error('BFB Success: exception', ['error' => $e->getMessage()]);
 		}
     }
 }
