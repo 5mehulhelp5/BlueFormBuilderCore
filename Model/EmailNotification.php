@@ -746,7 +746,8 @@ $templateVars = $this->getTemplateVars();
          */
         protected function processVariables($content)
         {
-            $variables = $this->getVariables();
+                    $content = (string)($content ?? '');
+$variables = $this->getVariables();
             foreach ($variables as $name => $value) {
                 $content = str_replace('[' . $name . ']', (!empty($value)) ? $value : '', $content);
             }
