@@ -392,7 +392,7 @@
                     $transportBuilder = $this->transportBuilder;
                     // use module-specific template instead of Magento_Email simple template
                     $transportBuilder
-                        ->setTemplateIdentifier('Magento_Email::email_template_simple')
+                        ->setTemplateIdentifier('blueformbuilder_email_template_simple')
                         ->setTemplateOptions([
                             'area'  => \Magento\Framework\App\Area::AREA_FRONTEND,
                             'store' => (int)$submission->getStoreId()
