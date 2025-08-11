@@ -27,6 +27,15 @@
      */
     class EmailNotification extends DataObject
     {
+    /**
+     * Safe str_replace that tolerates null subject (PHP 8.1+ deprecation fix)
+     */
+    protected function safeStrReplace($search, $replace, $subject)
+    {
+        return str_replace($search, $replace, (string)($subject ?? ''));
+    }
+
+
         const TYPE_ADMIN    = 'admin';
         const TYPE_CUSTOMER = 'customer';
 
@@ -627,7 +636,8 @@ $form       = $this->getForm();
          */
         public function getEmailSubject($subject)
         {
-        // Build the subject using Magento's email template engine (original behaviour)
+                $subject = (string)($subject ?? '');
+// Build the subject using Magento's email template engine (original behaviour)
         try {
             $templateVars = $this->getTemplateVars();
             $template     = $this->emailTemplate;
