@@ -264,12 +264,7 @@
          */
         public function sendEmail()
         {
-                $form = $this->getForm();
-        if (!$form || !$form->getId()) {
-            $this->logger->error('EmailNotification::sendEmail called without a bound form; aborting');
-            return false;
-        }
-// Fallback: Ensure form is loaded when missing (load by form_id from submission)
+        // Fallback: Ensure form is loaded when missing (load by form_id from submission)
         try {
             if (!isset($this->_form) || !$this->_form) {
                 $submission = method_exists($this, 'getSubmission') ? $this->getSubmission() : (isset($this->_submission) ? $this->_submission : null);
@@ -369,11 +364,20 @@
          */
         public function sendAdminNotification()
         {
-                $form = $this->getForm();
+        $form = $this->getForm();
         if (!$form || !$form->getId()) {
-            $this->logger->error('EmailNotification::sendAdminNotification: no form bound');
-            return false;
+            $submission = $this->getSubmission();
+            if ($submission && method_exists($submission, 'getFormId')) {
+                $formId = (int)$submission->getFormId();
+                if ($formId > 0 && isset($this->formFactory)) {
+                    try {
+                        $loadedForm = $this->formFactory->create()->load($formId);
+                        if ($loadedForm && $loadedForm->getId()) { $this->setForm($loadedForm); $form = $loadedForm; }
+                    } catch (\Throwable $e) { if (isset($this->logger)) { $this->logger->error('EmailNotification::sendAdminNotification: autoload form failed', ['form_id'=>$formId,'error'=>$e->getMessage()]); } }
+                }
+            }
         }
+        if (!$form || !$form->getId()) { if (isset($this->logger)) { $this->logger->error('EmailNotification::sendAdminNotification: no form bound'); } return false; }
 $form       = $this->getForm();
         $submission = $this->getSubmission();
             $recipientEmails     = $this->getAdminRecipientEmails();
@@ -414,17 +418,7 @@ $form       = $this->getForm();
          */
         private function getAdminRecipientEmails()
         {
-                $form = $this->getForm();
-        if (!$form || !$form->getId()) {
-            $this->logger->error('EmailNotification::getAdminRecipientEmails: no form bound');
-            return [];
-        }
-        $notification = method_exists($form, 'getNotification') ? $form->getNotification() : null;
-        if (!$notification) {
-            $this->logger->error('EmailNotification::getAdminRecipientEmails: no notification config on form');
-            return [];
-        }
-$form       = $this->getForm();
+        $form       = $this->getForm();
         $recipients = explode(',', $form->getRecipients());
             if ($adminAdditionEmails = $this->getAdminAdditionEmails()) {
                 $recipients = array_merge($recipients, $adminAdditionEmails);
@@ -468,7 +462,8 @@ $form       = $this->getForm();
          */
         public function send($type, $senderName, $senderEmail, $recipientEmails, $recipientBccEmails, $replyTo, $subject, $body, $attachments = [])
         {
-            $this->logger->debug('BlueFormBuilder EmailNotification: Starting send method', [
+                    $subject = (string)($subject ?? '');
+$this->logger->debug('BlueFormBuilder EmailNotification: Starting send method', [
                 'type'          => $type,
                 'sender_email'  => $senderEmail,
                 'recipients'    => $recipientEmails,
@@ -637,21 +632,15 @@ $form       = $this->getForm();
          */
         public function getEmailSubject($subject)
         {
-        // Render subject using Magento template engine; safe fallback if it fails
+        // Build the subject using Magento's email template engine (original behaviour)
         try {
             $templateVars = $this->getTemplateVars();
-            $subject = $this->processVariables((string)($subject ?? ''));
-            $template = $this->emailTemplate;
+            $template     = $this->emailTemplate;
+            // Ensure we process HTML for subject replacement; processVariables may still be used here
             $template->setTemplateType('html');
-            $template->setTemplateSubject($subject);
+            // Replace variables in the subject using processVariables before handing off to template
+            $template->setTemplateSubject($this->processVariables($subject));
             return $template->getProcessedTemplateSubject($templateVars);
-        } catch (\Throwable $e) {
-            $safe = (string)($subject ?? '');
-            $safe = preg_replace('/\{\{.*?\}\}/', '', $safe);
-            $this->logger->error('EmailNotification: subject fallback used', ['error' => $e->getMessage(), 'subject' => $safe]);
-            return trim($safe);
-        }
-    
         } catch (\Throwable $e) {
             // Fallback: return raw subject; if it fails, log and avoid fatal error
             $this->logger->error('BlueFormBuilder EmailNotification: Error processing email subject', ['error' => $e->getMessage()]);
@@ -762,10 +751,10 @@ $templateVars = $this->getTemplateVars();
          */
         protected function processVariables($content)
         {
-                    $content = (string)($content ?? '');
+            $content = (string)($content ?? '');
 $variables = $this->getVariables();
             foreach ($variables as $name => $value) {
-                $content = str_replace('[' . $name . ']', (!empty($value)) ? $value : '', $content);
+                $content = str_replace('[' . $name . ']', (!empty($value)) ? (string)$value : '', (string)$content);
             }
             return $this->coreHelper->filter($content);
         }
