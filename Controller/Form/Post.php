@@ -357,7 +357,8 @@
                     }
 
                     // Handle conditions for redirects and emails
-                    $actions = $this->getConditionAction();
+                    // Pass the sanitized post array to avoid calling getFormPost() internally
+                    $actions = $this->getConditionAction($this->getFormPost());
                     if ($actions['redirect_to']) {
                         $form->setRedirectTo($actions['redirect_to']);
                     }
@@ -707,7 +708,8 @@
             $data['values']                   = $this->coreHelper->serialize($this->getValues());
             $data['admin_submission_content'] = $this->getAdminSubmissionContent();
             $data['submission_content']       = $this->getSubmissionEmailContent();
-            $actions = $this->getConditionAction();
+            // Pass the sanitized post to getConditionAction to avoid internal calls
+            $actions = $this->getConditionAction($this->getFormPost());
             $data['condition_emails'] = implode(',', $actions['emails']);
 
             $data['form_params']            = $this->coreHelper->serialize($form->getData());
@@ -773,11 +775,20 @@
          * @param  array $post
          * @return array
          */
-        protected function getConditionAction()
+        /**
+         * Determine conditional actions based on form conditions.
+         * Accepts an optional $post array to avoid calling getFormPost() within
+         * this method. If $post is null, it falls back to $this->getFormPost().
+         *
+         * @param array|null $post
+         * @return array
+         */
+        protected function getConditionAction($post = null)
         {
             $emails     = [];
             $redirectTo = '';
-            $post       = $this.getFormPost();
+            // Use provided $post if available; otherwise obtain sanitized post values
+            $post       = $post ?? $this->getFormPost();
             $form       = $this->getForm();
             if ($form->getConditional()) {
                 $conditional = $this->coreHelper->unserialize($form->getConditional());
