@@ -636,7 +636,6 @@ $form       = $this->getForm();
          */
         public function getEmailSubject($subject)
         {
-        $subject = (string)($subject ?? '');
                 $subject = (string)($subject ?? '');
 // Build the subject using Magento's email template engine (original behaviour)
         try {
@@ -757,7 +756,8 @@ $templateVars = $this->getTemplateVars();
          */
         protected function processVariables($content)
         {
-            $variables = $this->getVariables();
+            $content = (string)($content ?? '');
+$variables = $this->getVariables();
             foreach ($variables as $name => $value) {
                 $content = str_replace('[' . $name . ']', (!empty($value)) ? $value : '', $content);
             }
