@@ -392,7 +392,7 @@
                     $transportBuilder = $this->transportBuilder;
                     // use module-specific template instead of Magento_Email simple template
                     $transportBuilder
-                        ->setTemplateIdentifier('blueformbuilder_email_template_simple')
+                        ->setTemplateIdentifier('Magento_Email::email_template_simple')
                         ->setTemplateOptions([
                             'area'  => \Magento\Framework\App\Area::AREA_FRONTEND,
                             'store' => (int)$submission->getStoreId()
@@ -548,10 +548,20 @@
          */
         public function getEmailSubject($subject)
         {
-            // The original implementation processed the subject via Magento's email template engine.
-            // In some environments this can fail and return a generic error message.
-            // We simply perform variable replacement and return the result.
-            return $this->processVariables($subject);
+        // Build the subject using Magento's email template engine (original behaviour)
+        try {
+            $templateVars = $this->getTemplateVars();
+            $template     = $this->emailTemplate;
+            // Ensure we process HTML for subject replacement; processVariables may still be used here
+            $template->setTemplateType('html');
+            // Replace variables in the subject using processVariables before handing off to template
+            $template->setTemplateSubject($this->processVariables($subject));
+            return $template->getProcessedTemplateSubject($templateVars);
+        } catch (\Throwable $e) {
+            // Fallback: return raw subject; if it fails, log and avoid fatal error
+            $this->logger->error('BlueFormBuilder EmailNotification: Error processing email subject', ['error' => $e->getMessage()]);
+            return $subject;
+        }
         }
 
         /**
