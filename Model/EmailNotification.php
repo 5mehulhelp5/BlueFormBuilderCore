@@ -264,7 +264,12 @@
          */
         public function sendEmail()
         {
-        // Fallback: Ensure form is loaded when missing (load by form_id from submission)
+                $form = $this->getForm();
+        if (!$form || !$form->getId()) {
+            $this->logger->error('EmailNotification::sendEmail called without a bound form; aborting');
+            return false;
+        }
+// Fallback: Ensure form is loaded when missing (load by form_id from submission)
         try {
             if (!isset($this->_form) || !$this->_form) {
                 $submission = method_exists($this, 'getSubmission') ? $this->getSubmission() : (isset($this->_submission) ? $this->_submission : null);
@@ -364,7 +369,12 @@
          */
         public function sendAdminNotification()
         {
-        $form       = $this->getForm();
+                $form = $this->getForm();
+        if (!$form || !$form->getId()) {
+            $this->logger->error('EmailNotification::sendAdminNotification: no form bound');
+            return false;
+        }
+$form       = $this->getForm();
         $submission = $this->getSubmission();
             $recipientEmails     = $this->getAdminRecipientEmails();
             $recipientsBcc       = explode(',', $form->getRecipientsBcc());
@@ -404,7 +414,17 @@
          */
         private function getAdminRecipientEmails()
         {
-        $form       = $this->getForm();
+                $form = $this->getForm();
+        if (!$form || !$form->getId()) {
+            $this->logger->error('EmailNotification::getAdminRecipientEmails: no form bound');
+            return [];
+        }
+        $notification = method_exists($form, 'getNotification') ? $form->getNotification() : null;
+        if (!$notification) {
+            $this->logger->error('EmailNotification::getAdminRecipientEmails: no notification config on form');
+            return [];
+        }
+$form       = $this->getForm();
         $recipients = explode(',', $form->getRecipients());
             if ($adminAdditionEmails = $this->getAdminAdditionEmails()) {
                 $recipients = array_merge($recipients, $adminAdditionEmails);
@@ -617,7 +637,7 @@
          */
         public function getEmailSubject($subject)
         {
-        // Prefer Magento's template engine
+        // Render subject using Magento template engine; safe fallback if it fails
         try {
             $templateVars = $this->getTemplateVars();
             $subject = $this->processVariables((string)($subject ?? ''));
@@ -626,14 +646,12 @@
             $template->setTemplateSubject($subject);
             return $template->getProcessedTemplateSubject($templateVars);
         } catch (\Throwable $e) {
-            // Fallback: remove any Magento directives and return plain subject
             $safe = (string)($subject ?? '');
-            // strip {{...}} to avoid "error generating content"
             $safe = preg_replace('/\{\{.*?\}\}/', '', $safe);
-            $this->logger->error('BlueFormBuilder EmailNotification: subject fallback used', ['error' => $e->getMessage(), 'subject' => $safe]);
+            $this->logger->error('EmailNotification: subject fallback used', ['error' => $e->getMessage(), 'subject' => $safe]);
             return trim($safe);
         }
-
+    
         } catch (\Throwable $e) {
             // Fallback: return raw subject; if it fails, log and avoid fatal error
             $this->logger->error('BlueFormBuilder EmailNotification: Error processing email subject', ['error' => $e->getMessage()]);
@@ -649,7 +667,8 @@
          */
         public function getEmailHtml($content)
         {
-            if (!$content) {
+                    $content = $this->processVariables($content);
+if (!$content) {
                 return null;
             }
             $templateVars = $this->getTemplateVars();
@@ -667,7 +686,8 @@
          */
         public function getEmailBody($content)
         {
-            $templateVars = $this->getTemplateVars();
+                    $content = $this->processVariables($content);
+$templateVars = $this->getTemplateVars();
             $template     = $this->emailTemplate;
             $template->setTemplateType('html');
             $template->setTemplateText($content);
@@ -742,8 +762,8 @@
          */
         protected function processVariables($content)
         {
-            $content = (string)($content ?? '');
-            $variables = $this->getVariables();
+                    $content = (string)($content ?? '');
+$variables = $this->getVariables();
             foreach ($variables as $name => $value) {
                 $content = str_replace('[' . $name . ']', (!empty($value)) ? $value : '', $content);
             }
