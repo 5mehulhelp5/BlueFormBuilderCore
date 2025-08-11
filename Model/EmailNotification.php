@@ -617,15 +617,46 @@
          */
         public function getEmailSubject($subject)
         {
-        // Build the subject using Magento's email template engine (original behaviour)
+        // Build the subject using Magento's email template engine (preferred)
         try {
             $templateVars = $this->getTemplateVars();
             $template     = $this->emailTemplate;
-            // Ensure we process HTML for subject replacement; processVariables may still be used here
             $template->setTemplateType('html');
-            // Replace variables in the subject using processVariables before handing off to template
-            $template->setTemplateSubject($this->processVariables($subject));
+            // Preprocess square-bracket variables first (e.g., [submission_id])
+            $subject = $this->processVariables((string)($subject ?? ''));
+            $template->setTemplateSubject($subject);
             return $template->getProcessedTemplateSubject($templateVars);
+        } catch (\Throwable $e) {
+            // Robust fallback: resolve {{var key}} manually to avoid "error generating content" subjects
+            try {
+                $templateVars = isset($templateVars) ? $templateVars : $this->getTemplateVars();
+                $flat = [];
+                // Flatten simple-level arrays/objects into strings where possible
+                foreach ($templateVars as $k => $v) {
+                    if (is_scalar($v) || (is_object($v) && method_exists($v, '__toString'))) {
+                        $flat[$k] = (string)$v;
+                    } elseif (is_array($v) && isset($v['value'])) {
+                        $flat[$k] = (string)$v['value'];
+                    } else {
+                        $flat[$k] = '';
+                    }
+                }
+                $safe = (string)($subject ?? '');
+                // Replace {{var key}} with values
+                $safe = preg_replace_callback('/\{\{\s*var\s+([a-zA-Z0-9_\.]+)\s*\}\}/', function ($m) use ($flat) {
+                    $key = $m[1];
+                    return array_key_exists($key, $flat) ? $flat[$key] : '';
+                }, $safe);
+                // Strip any remaining Magento directives to avoid scary subject text
+                $safe = preg_replace('/\{\{.*?\}\}/', '', $safe);
+                $this->logger->error('BlueFormBuilder EmailNotification: getEmailSubject() fallback used', ['error' => $e->getMessage(), 'subject' => $safe]);
+                return trim($safe);
+            } catch (\Throwable $e2) {
+                $this->logger->error('BlueFormBuilder EmailNotification: getEmailSubject() hard fallback failed', ['error' => $e2->getMessage()]);
+                return (string)($subject ?? '');
+            }
+        }
+
         } catch (\Throwable $e) {
             // Fallback: return raw subject; if it fails, log and avoid fatal error
             $this->logger->error('BlueFormBuilder EmailNotification: Error processing email subject', ['error' => $e->getMessage()]);
