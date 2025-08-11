@@ -191,16 +191,30 @@
         // Assign the form if it is already present on the submission
         $formFromSubmission = $submission->getForm();
         // If the form property is missing, attempt to load it via the form_id field
-        if (!$formFromSubmission && method_exists($submission, 'getFormId')) {
-            $formId = $submission->getFormId();
+        if (!$formFromSubmission) {
+            // Try to get form_id directly from the data array
+            $formId = null;
+            if ($submission->getData('form_id')) {
+                $formId = $submission->getData('form_id');
+            } else {
+                // Fallback to magic getter getFormId(), even if it is provided via __call (method_exists may return false)
+                try {
+                    $formId = $submission->getFormId();
+                } catch (\Exception $e) {
+                    $formId = null;
+                }
+            }
             if ($formId) {
                 try {
                     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                     /** @var \Cytracon\BlueFormBuilderCore\Model\Form $formModel */
                     $formModel = $objectManager->create(\Cytracon\BlueFormBuilderCore\Model\Form::class);
-                    $formFromSubmission = $formModel->load($formId);
+                    $loadedForm = $formModel->load($formId);
+                    // Only assign if the load was successful
+                    if ($loadedForm && $loadedForm->getId()) {
+                        $formFromSubmission = $loadedForm;
+                    }
                 } catch (\Exception $e) {
-                    // In case of any error loading the form, keep it null and log the error
                     $this->logger->error('BlueFormBuilder EmailNotification: Unable to load form for submission', ['form_id' => $formId, 'error' => $e->getMessage()]);
                 }
             }
