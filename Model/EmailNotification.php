@@ -636,6 +636,7 @@ $form       = $this->getForm();
          */
         public function getEmailSubject($subject)
         {
+        $subject = (string)($subject ?? '');
                 $subject = (string)($subject ?? '');
 // Build the subject using Magento's email template engine (original behaviour)
         try {
