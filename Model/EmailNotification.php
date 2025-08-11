@@ -264,6 +264,41 @@
          */
         public function sendEmail()
         {
+        // Fallback: Ensure form is loaded when missing (load by form_id from submission)
+        try {
+            if (!isset($this->_form) || !$this->_form) {
+                $submission = method_exists($this, 'getSubmission') ? $this->getSubmission() : (isset($this->_submission) ? $this->_submission : null);
+                if ($submission) {
+                    $formId = null;
+                    if (method_exists($submission, 'getData')) {
+                        $formId = $submission->getData('form_id');
+                    }
+                    if (!$formId && method_exists($submission, 'getFormId')) {
+                        $formId = $submission->getFormId();
+                    }
+                    if ($formId) {
+                        $om = \Magento\Framework\App\ObjectManager::getInstance();
+                        $formModel = $om->create(\Cytracon\BlueFormBuilderCore\Model\Form::class);
+                        $loaded = $formModel->load($formId);
+                        if ($loaded && method_exists($loaded, 'getId') && $loaded->getId()) {
+                            $this->_form = $loaded;
+                            if (isset($this->logger)) {
+                                $this->logger->debug('BFB EmailNotification: Fallback loaded form in sendEmail', ['form_id' => $formId]);
+                            }
+                        } elseif (isset($this->logger)) {
+                            $this->logger->error('BFB EmailNotification: Fallback form load returned empty', ['form_id' => $formId]);
+                        }
+                    } elseif (isset($this->logger)) {
+                        $this->logger->error('BFB EmailNotification: No form_id on submission during sendEmail fallback');
+                    }
+                }
+            }
+        } catch (\Throwable $e) {
+            if (isset($this->logger)) {
+                $this->logger->error('BFB EmailNotification: Exception in sendEmail fallback', ['error' => $e->getMessage()]);
+            }
+        }
+        
             $this->logger->debug('BlueFormBuilder EmailNotification: Starting sendEmail method');
         $form    = $this->getForm();
         $success = true;
