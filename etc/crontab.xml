@@ -13,13 +13,17 @@
  * @copyright Copyright (C) 2019 Cytracon (https://www.cytracon.com)
  */
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/crontab.xsd">
     <group id="default">
-		<job name="blueformbuilder_delete_unusued_files" instance="Cytracon\BlueFormBuilderCore\Cron\CleanFiles" method="execute">
-			<schedule>0 1 * * *</schedule>
-		</job>
-		<job name="blueformbuilder_clean_form_progress" instance="Cytracon\BlueFormBuilderCore\Cron\CleanFiles" method="execute">
-			<schedule>0 1 * * *</schedule>
-		</job>
+        <job name="blueformbuilder_delete_unusued_files" instance="Cytracon\BlueFormBuilderCore\Cron\DeleteUnUsedFiles" method="execute">
+            <schedule>0 1 * * *</schedule>
+        </job>
+        <job name="blueformbuilder_clean_form_progress" instance="Cytracon\BlueFormBuilderCore\Cron\CleanFormProgress" method="execute">
+            <schedule>0 1 * * *</schedule>
+        </job>
+        <job name="blueformbuilder_send_mail" instance="Cytracon\BlueFormBuilderCore\Cron\SendMail" method="execute">
+            <schedule>* * * * *</schedule>
+        </job>
     </group>
 </config>

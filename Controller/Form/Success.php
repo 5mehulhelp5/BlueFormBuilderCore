@@ -77,7 +77,15 @@ class Success extends \Magento\Framework\App\Action\Action
 				$collection->addFieldToFilter('submission_hash', $post['key']);
 				$submission = $collection->getFirstItem();
                 $this->logger->debug('BFB Success: loaded submission', ['id' => $submission->getId()]);
-				if ($submission->getId() && (!$submission->getIsActive() || $submission->getId()==$post['submission_id'])) {
+				if ($submission->getId()
+					&& (
+						!$submission->getIsActive()
+						|| !$submission->getSendCount()
+						|| !$submission->getCustomerSendCount()
+						|| $submission->getId() == ($post['submission_id'] ?? null)
+					)
+				) {
+
 					$form = $submission->getForm();
 					// Before Save
 					$post = $this->coreHelper->unserialize($submission->getPost());

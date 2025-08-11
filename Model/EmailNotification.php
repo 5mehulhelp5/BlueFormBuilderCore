@@ -220,19 +220,34 @@ class EmailNotification extends DataObject
     /**
      * @return void
      */
-    public function sendEmail()
-    {
-        $this->logger->debug('BlueFormBuilder EmailNotification: Starting sendEmail method');
-        $form = $this->getForm();
-        if ($form->getEnableCustomerNotification() && $form->getCustomerSenderEmail() && $form->getCustomerEmailBody()) {
+public function sendEmail()
+{
+    $this->logger->debug('BlueFormBuilder EmailNotification: Starting sendEmail method');
+    $form    = $this->getForm();
+    $success = true;
+    try {
+        if ($form->getEnableCustomerNotification()
+            && $form->getCustomerSenderEmail()
+            && $form->getCustomerEmailBody()) {
             $this->sendCustomerNotification();
         }
-        if ($form->getEnableNotification() && ($form->getRecipients() || $this->getAdminRecipientEmails()) && $form->getEmailBody()) {
+        if ($form->getEnableNotification()
+            && ($form->getRecipients() || $this->getAdminRecipientEmails())
+            && $form->getEmailBody()) {
             $this->sendAdminNotification();
         }
-        $this->_submissionData['is_active'] = 1;
-        $this->updateSubmission();
+    } catch (\Exception $e) {
+        $success = false;
+        $this->logger->error('BlueFormBuilder EmailNotification: SendEmail failed', [
+            'error' => $e->getMessage()
+        ]);
     }
+    if ($success) {
+        $this->_submissionData['is_active'] = 1;
+    }
+    $this->updateSubmission();
+}
+
 
     /**
      * @return void

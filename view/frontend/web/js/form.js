@@ -643,59 +643,63 @@ define([
             });
 
             $.ajax({
-                url: form.attr('action'),
-                data: submitData,
-                type: 'post',
-                dataType: 'json',
-                beforeSend: function() {
-                    $(form).trigger('bfbBeforeSubmit', submitData);
-                    self.element.parent().addClass('bfb-loading');
-                    if (self.options.beforeJsSelector) {
-                        eval($(self.options.beforeJsSelector).html());
-                    }
-                },
-                success: function(res) {
-                    self.element.parent().removeClass('bfb-loading');
-                    $(form).trigger('bfbAfterSubmit', res);
+    url: form.attr('action'),
+    data: submitData,
+    type: 'post',
+    dataType: 'json',
+    beforeSend: function() {
+        $(form).trigger('bfbBeforeSubmit', submitData);
+        self.element.parent().addClass('bfb-loading');
+        if (self.options.beforeJsSelector) {
+            eval($(self.options.beforeJsSelector).html());
+        }
+    },
+    success: function(res) {
+        self.element.parent().removeClass('bfb-loading');
+        $(form).trigger('bfbAfterSubmit', res);
 
-                    if (res.message && res.type == 'alert') {
-                        alert(res.message);
-                        return;
-                    }
+        if (res.message && res.type == 'alert') {
+            alert(res.message);
+            return;
+        }
 
-                    if (res.status && res.key) {
-                        $.ajax({
-                            url: self.options.successUrl,
-                            data: {key: res.key, submission_id: self.options.submissionId},
-                            type: 'post'
-                        });
-                    }
-
-                    if (res.status && res.message) {
-                        if (self.options.afterJsSelector) {
-                            eval($(self.options.afterJsSelector).html());
-                        }
-                        var parent = self.element.parent();
-                        parent.html(res.message);
-
-                        if (res.redirect) {
-                            setTimeout(function() {
-                                window.location.href = res.redirect;
-                            }, 500);
-                        } else {
-                            parent.find("script").each(function(i) {
-                                eval($(this).html());
-                            });
-                        }
-
-                    } else {
-                        if (typeof(grecaptcha) === 'object' && self.element.find('.mgz-element-bfb_recaptcha').length) {
-                            grecaptcha.reset();
-                        }
-                    }
-                }
+        if (res.status && res.key) {
+            // hier wird die Success-URL aufgerufen – jetzt mit Fehlerbehandlung
+            $.ajax({
+                url: self.options.successUrl,
+                data: {key: res.key, submission_id: self.options.submissionId},
+                type: 'post'
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error('BlueFormBuilder: Fehler beim Aufruf der Success-URL', textStatus, errorThrown);
             });
-        },
+        }
+
+        if (res.status && res.message) {
+            if (self.options.afterJsSelector) {
+                eval($(self.options.afterJsSelector).html());
+            }
+            var parent = self.element.parent();
+            parent.html(res.message);
+
+            if (res.redirect) {
+                setTimeout(function() {
+                    window.location.href = res.redirect;
+                }, 500);
+            } else {
+                parent.find("script").each(function(i) {
+                    eval($(this).html());
+                });
+            }
+
+        } else {
+            if (typeof(grecaptcha) === 'object' && self.element.find('.mgz-element-bfb_recaptcha').length) {
+                grecaptcha.reset();
+            }
+        }
+    }
+});
+
 
         loadElementValidation: function (elem, loaded) {
             var uniq       = $(elem).attr('bfb-uniq');
