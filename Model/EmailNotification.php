@@ -269,7 +269,12 @@
          */
         public function sendCustomerNotification()
         {
-            $form    = $this->getForm();
+        $form    = $this->getForm();
+        // Safeguard: if no form is set, log and abort
+        if (!$form) {
+            $this->logger->error('BlueFormBuilder EmailNotification: Cannot send customer notification because no form is set');
+            return;
+        }
             $subject = $this->getEmailSubject($form->getCustomerEmailSubject());
             $header  = $this->getEmailHtml($form->getCustomerEmailHeader());
             $footer  = $this->getEmailHtml($form->getCustomerFooterHeader());
@@ -300,8 +305,13 @@
          */
         public function sendAdminNotification()
         {
-            $form       = $this->getForm();
-            $submission = $this->getSubmission();
+        $form       = $this->getForm();
+        // Safeguard: if form is null, log and abort to prevent null dereferencing
+        if (!$form) {
+            $this->logger->error('BlueFormBuilder EmailNotification: Cannot send admin notification because no form is set');
+            return;
+        }
+        $submission = $this->getSubmission();
             $recipientEmails     = $this->getAdminRecipientEmails();
             $recipientsBcc       = explode(',', $form->getRecipientsBcc());
             $recipientsBccEmails = [];
@@ -340,8 +350,11 @@
          */
         private function getAdminRecipientEmails()
         {
-            $form       = $this->getForm();
-            $recipients = explode(',', $form->getRecipients());
+        $form       = $this->getForm();
+        if (!$form) {
+            return [];
+        }
+        $recipients = explode(',', $form->getRecipients());
             if ($adminAdditionEmails = $this->getAdminAdditionEmails()) {
                 $recipients = array_merge($recipients, $adminAdditionEmails);
             }
