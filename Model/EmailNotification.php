@@ -467,7 +467,8 @@ $form       = $this->getForm();
          */
         public function send($type, $senderName, $senderEmail, $recipientEmails, $recipientBccEmails, $replyTo, $subject, $body, $attachments = [])
         {
-            $this->logger->debug('BlueFormBuilder EmailNotification: Starting send method', [
+                    $subject = (string)($subject ?? '');
+$this->logger->debug('BlueFormBuilder EmailNotification: Starting send method', [
                 'type'          => $type,
                 'sender_email'  => $senderEmail,
                 'recipients'    => $recipientEmails,
@@ -756,8 +757,7 @@ $templateVars = $this->getTemplateVars();
          */
         protected function processVariables($content)
         {
-            $content = (string)($content ?? '');
-$variables = $this->getVariables();
+            $variables = $this->getVariables();
             foreach ($variables as $name => $value) {
                 $content = str_replace('[' . $name . ']', (!empty($value)) ? $value : '', $content);
             }
