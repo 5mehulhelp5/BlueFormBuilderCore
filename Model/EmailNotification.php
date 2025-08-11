@@ -188,7 +188,24 @@
         public function setSubmission(\Cytracon\BlueFormBuilderCore\Model\Submission $submission)
         {
             $this->_submission = $submission;
-            $this->_form       = $submission->getForm();
+        // Assign the form if it is already present on the submission
+        $formFromSubmission = $submission->getForm();
+        // If the form property is missing, attempt to load it via the form_id field
+        if (!$formFromSubmission && method_exists($submission, 'getFormId')) {
+            $formId = $submission->getFormId();
+            if ($formId) {
+                try {
+                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                    /** @var \Cytracon\BlueFormBuilderCore\Model\Form $formModel */
+                    $formModel = $objectManager->create(\Cytracon\BlueFormBuilderCore\Model\Form::class);
+                    $formFromSubmission = $formModel->load($formId);
+                } catch (\Exception $e) {
+                    // In case of any error loading the form, keep it null and log the error
+                    $this->logger->error('BlueFormBuilder EmailNotification: Unable to load form for submission', ['form_id' => $formId, 'error' => $e->getMessage()]);
+                }
+            }
+        }
+        $this->_form       = $formFromSubmission;
             $this->setVariables($submission->getVariables());
             return $this;
         }
