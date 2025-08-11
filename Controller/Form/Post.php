@@ -397,7 +397,7 @@
                     // Email sending: directly trigger notifications after commit
                     try {
                         $this->emailNotification
-                            ->setAttachments($this->_attachments)
+                            ->setAttachments($this->_attachments)->setForm($form)
                             ->setSubmission($submission)
                             ->sendEmail();
                         $this->logger->debug('BFB Post: Email Versand im Post-Controller angestoßen');
