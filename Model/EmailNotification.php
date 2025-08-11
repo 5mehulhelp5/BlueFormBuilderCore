@@ -264,7 +264,12 @@
          */
         public function sendEmail()
         {
-        // Fallback: Ensure form is loaded when missing (load by form_id from submission)
+                $form = $this->getForm();
+        if (!$form || !$form->getId()) {
+            $this->logger->error('EmailNotification::sendEmail called without a bound form; aborting');
+            return false;
+        }
+// Fallback: Ensure form is loaded when missing (load by form_id from submission)
         try {
             if (!isset($this->_form) || !$this->_form) {
                 $submission = method_exists($this, 'getSubmission') ? $this->getSubmission() : (isset($this->_submission) ? $this->_submission : null);
@@ -641,7 +646,8 @@
          */
         public function getEmailHtml($content)
         {
-            if (!$content) {
+                    $content = $this->processVariables($content);
+if (!$content) {
                 return null;
             }
             $templateVars = $this->getTemplateVars();
@@ -659,7 +665,8 @@
          */
         public function getEmailBody($content)
         {
-            $templateVars = $this->getTemplateVars();
+                    $content = $this->processVariables($content);
+$templateVars = $this->getTemplateVars();
             $template     = $this->emailTemplate;
             $template->setTemplateType('html');
             $template->setTemplateText($content);
