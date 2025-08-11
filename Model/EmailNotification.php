@@ -188,9 +188,9 @@
         public function setSubmission(\Cytracon\BlueFormBuilderCore\Model\Submission $submission)
         {
             $this->_submission = $submission;
-        $this->_form = $submission->getForm();
-        $this->setVariables($submission->getVariables());
-        return $this;
+            $this->_form       = $submission->getForm();
+            $this->setVariables($submission->getVariables());
+            return $this;
         }
 
         /**
@@ -232,6 +232,11 @@
         {
             $this->logger->debug('BlueFormBuilder EmailNotification: Starting sendEmail method');
         $form    = $this->getForm();
+        // If no form is set, we cannot proceed; log error and abort
+        if (!$form) {
+            $this->logger->error('BlueFormBuilder EmailNotification: No form set for sending email');
+            return;
+        }
         $success = true;
             try {
                 // send customer notification if enabled
@@ -265,6 +270,11 @@
         public function sendCustomerNotification()
         {
         $form    = $this->getForm();
+        // Safeguard: if no form is set, log and abort
+        if (!$form) {
+            $this->logger->error('BlueFormBuilder EmailNotification: Cannot send customer notification because no form is set');
+            return;
+        }
             $subject = $this->getEmailSubject($form->getCustomerEmailSubject());
             $header  = $this->getEmailHtml($form->getCustomerEmailHeader());
             $footer  = $this->getEmailHtml($form->getCustomerFooterHeader());
@@ -296,6 +306,11 @@
         public function sendAdminNotification()
         {
         $form       = $this->getForm();
+        // Safeguard: if form is null, log and abort to prevent null dereferencing
+        if (!$form) {
+            $this->logger->error('BlueFormBuilder EmailNotification: Cannot send admin notification because no form is set');
+            return;
+        }
         $submission = $this->getSubmission();
             $recipientEmails     = $this->getAdminRecipientEmails();
             $recipientsBcc       = explode(',', $form->getRecipientsBcc());
@@ -336,6 +351,9 @@
         private function getAdminRecipientEmails()
         {
         $form       = $this->getForm();
+        if (!$form) {
+            return [];
+        }
         $recipients = explode(',', $form->getRecipients());
             if ($adminAdditionEmails = $this->getAdminAdditionEmails()) {
                 $recipients = array_merge($recipients, $adminAdditionEmails);
@@ -548,20 +566,10 @@
          */
         public function getEmailSubject($subject)
         {
-        // Build the subject using Magento's email template engine (original behaviour)
-        try {
-            $templateVars = $this->getTemplateVars();
-            $template     = $this->emailTemplate;
-            // Ensure we process HTML for subject replacement; processVariables may still be used here
-            $template->setTemplateType('html');
-            // Replace variables in the subject using processVariables before handing off to template
-            $template->setTemplateSubject($this->processVariables($subject));
-            return $template->getProcessedTemplateSubject($templateVars);
-        } catch (\Throwable $e) {
-            // Fallback: return raw subject; if it fails, log and avoid fatal error
-            $this->logger->error('BlueFormBuilder EmailNotification: Error processing email subject', ['error' => $e->getMessage()]);
-            return $subject;
-        }
+            // The original implementation processed the subject via Magento's email template engine.
+            // In some environments this can fail and return a generic error message.
+            // We simply perform variable replacement and return the result.
+            return $this->processVariables($subject);
         }
 
         /**
