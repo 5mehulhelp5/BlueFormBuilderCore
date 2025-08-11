@@ -369,7 +369,12 @@
          */
         public function sendAdminNotification()
         {
-        $form       = $this->getForm();
+                $form = $this->getForm();
+        if (!$form || !$form->getId()) {
+            $this->logger->error('EmailNotification::sendAdminNotification: no form bound');
+            return false;
+        }
+$form       = $this->getForm();
         $submission = $this->getSubmission();
             $recipientEmails     = $this->getAdminRecipientEmails();
             $recipientsBcc       = explode(',', $form->getRecipientsBcc());
@@ -409,7 +414,18 @@
          */
         private function getAdminRecipientEmails()
         {
-        $form       = $this->getForm();
+                $form = $this->getForm();
+        if (!$form || !$form->getId()) {
+            $this->logger->error('EmailNotification::getAdminRecipientEmails: no form bound');
+            return [];
+        }
+        $notification = method_exists($form, 'getNotification') ? $form->getNotification() : null;
+        if (!$notification) {
+            $this->logger->error('EmailNotification::getAdminRecipientEmails: no notification config on form');
+            return [];
+        }
+        // getRecipients() on null guard
+$form       = $this->getForm();
         $recipients = explode(',', $form->getRecipients());
             if ($adminAdditionEmails = $this->getAdminAdditionEmails()) {
                 $recipients = array_merge($recipients, $adminAdditionEmails);
