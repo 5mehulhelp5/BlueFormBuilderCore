@@ -231,8 +231,13 @@
         public function sendEmail()
         {
             $this->logger->debug('BlueFormBuilder EmailNotification: Starting sendEmail method');
-            $form    = $this->getForm();
-            $success = true;
+        $form    = $this->getForm();
+        // If no form is set, we cannot proceed; log error and abort
+        if (!$form) {
+            $this->logger->error('BlueFormBuilder EmailNotification: No form set for sending email');
+            return;
+        }
+        $success = true;
             try {
                 // send customer notification if enabled
                 if ($form->getEnableCustomerNotification()
