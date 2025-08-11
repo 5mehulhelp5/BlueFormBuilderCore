@@ -27,15 +27,6 @@
      */
     class EmailNotification extends DataObject
     {
-    /**
-     * Safe str_replace that tolerates null subject (PHP 8.1+ deprecation fix)
-     */
-    protected function safeStrReplace($search, $replace, $subject)
-    {
-        return str_replace($search, $replace, (string)($subject ?? ''));
-    }
-
-
         const TYPE_ADMIN    = 'admin';
         const TYPE_CUSTOMER = 'customer';
 
@@ -467,7 +458,8 @@ $form       = $this->getForm();
          */
         public function send($type, $senderName, $senderEmail, $recipientEmails, $recipientBccEmails, $replyTo, $subject, $body, $attachments = [])
         {
-            $this->logger->debug('BlueFormBuilder EmailNotification: Starting send method', [
+                    $subject = (string)($subject ?? '');
+$this->logger->debug('BlueFormBuilder EmailNotification: Starting send method', [
                 'type'          => $type,
                 'sender_email'  => $senderEmail,
                 'recipients'    => $recipientEmails,
@@ -636,8 +628,7 @@ $form       = $this->getForm();
          */
         public function getEmailSubject($subject)
         {
-                $subject = (string)($subject ?? '');
-// Build the subject using Magento's email template engine (original behaviour)
+        // Build the subject using Magento's email template engine (original behaviour)
         try {
             $templateVars = $this->getTemplateVars();
             $template     = $this->emailTemplate;
@@ -756,10 +747,9 @@ $templateVars = $this->getTemplateVars();
          */
         protected function processVariables($content)
         {
-            $content = (string)($content ?? '');
-$variables = $this->getVariables();
+            $variables = $this->getVariables();
             foreach ($variables as $name => $value) {
-                $content = str_replace('[' . $name . ']', (!empty($value)) ? (string)$value : '', (string)$content);
+                $content = str_replace('[' . $name . ']', (!empty($value)) ? $value : '', $content);
             }
             return $this->coreHelper->filter($content);
         }
