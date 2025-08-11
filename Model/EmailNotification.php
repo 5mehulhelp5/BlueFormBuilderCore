@@ -390,7 +390,7 @@ public function sendEmail()
 
                 // Use safe file-based template and pass body as "message"
                 $transportBuilder
-                    ->setTemplateIdentifier('Magento_Email::email_template_simple')
+                    ->setTemplateIdentifier('blueformbuilder_email_template_simple')
                     ->setTemplateOptions([
                         'area'  => \Magento\Framework\App\Area::AREA_FRONTEND,
                         'store' => (int)$submission->getStoreId()
